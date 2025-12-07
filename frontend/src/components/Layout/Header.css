@@ -1,0 +1,75 @@
+/* src/components/Layout/Header.css */
+
+.header {
+  background-color: var(--color-primary); /* Azul Oscuro de la marca */
+  color: white;
+  padding: var(--spacing-unit) calc(var(--spacing-unit) * 3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 60px; /* Altura fija para el header */
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+}
+
+.header-brand img {
+  height: 36px;
+  margin-right: var(--spacing-unit);
+}
+
+.header-logo-text {
+  color: white;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-left: var(--spacing-unit);
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: calc(var(--spacing-unit) * 1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  margin-right: calc(var(--spacing-unit) * 2);
+  font-size: 0.9rem;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.nav-item {
+  color: white;
+  margin-left: calc(var(--spacing-unit) * 2);
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.nav-item:hover {
+  color: var(--color-secondary); /* Acento al pasar el ratón */
+  text-decoration: none;
+}
+
+.nav-item i {
+  margin-right: calc(var(--spacing-unit) * 0.5);
+  font-size: 1.2rem;
+}
+
+/* Iconos (requiere Font Awesome o similar en public/index.html) */
+/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" /> */

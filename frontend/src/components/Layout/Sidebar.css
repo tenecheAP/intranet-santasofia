@@ -1,0 +1,45 @@
+/* src/components/Layout/Sidebar.css */
+
+.sidebar {
+  width: 250px; /* Ancho fijo para la barra lateral */
+  background-color: white;
+  padding: calc(var(--spacing-unit) * 2);
+  border-right: 1px solid var(--color-border);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+}
+
+.sidebar-nav li {
+  margin-bottom: var(--spacing-unit);
+}
+
+.nav-link {
+  display: block;
+  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+  color: var(--color-text-main);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  background-color: var(--color-background-light);
+  color: var(--color-secondary);
+}
+
+.nav-link.active {
+  background-color: var(--color-secondary); /* Color de acento para el elemento activo */
+  color: white;
+  font-weight: 600;
+}
+
+.nav-link.active:hover {
+  background-color: var(--color-accent); /* Ligeramente más oscuro en hover */
+  color: white;
+}

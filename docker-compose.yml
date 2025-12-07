@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+
+  # =======================================================
+  # 1. Base de Datos (PostgreSQL)
+  # =======================================================
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: user_intranet
+      POSTGRES_PASSWORD: strong_password
+      POSTGRES_DB: intranet_db
+    ports:
+      # Puerto para acceder a la DB desde tu máquina local (opcional, pero útil)
+      - "5432:5432"
+    volumes:
+      # Persistencia de los datos para que no se pierdan al apagar el contenedor
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user_intranet -d intranet_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # =======================================================
+  # 2. Backend API (Node.js/Express - Lógica y Conexión a DB)
+  # =======================================================
+  api:
+    build: 
+      context: ./backend # Ubicación de tu Dockerfile para el Backend
+    restart: always
+    ports:
+      # Puerto de la API para acceder desde tu máquina local
+      - "3001:3001"
+    environment:
+      # La API se conecta a la DB usando el nombre del servicio 'db'
+      NODE_ENV: development
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: user_intranet
+      DB_PASSWORD: strong_password
+      DB_NAME: intranet_db
+    depends_on:
+      # Espera a que la base de datos esté "saludable" antes de iniciar
+      db:
+        condition: service_healthy 
+    # Mapeo de volumen para desarrollo: permite cambios en tiempo real
+    volumes:
+      - ./backend:/app
+      - /app/node_modules  # Volumen anónimo para preservar node_modules del contenedor
+
+  # =======================================================
+  # 3. Frontend (React SPA - Servido por Nginx)
+  # =======================================================
+  frontend:
+    build:
+      context: ./frontend # Ubicación del Dockerfile para React/Nginx
+    restart: always
+    ports:
+      # Puerto 80 para la Intranet, accesible desde tu máquina local en el puerto 80
+      - "80:80"
+    depends_on:
+      - api # Opcional, asegura que la API esté lista primero
+
+volumes:
+  db-data:

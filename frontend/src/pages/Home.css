@@ -1,0 +1,68 @@
+/* src/pages/Home.css */
+
+.home-page {
+  padding: calc(var(--spacing-unit) * 2);
+}
+
+.home-page h1 {
+  color: var(--color-primary);
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.home-page p {
+  margin-bottom: calc(var(--spacing-unit) * 3);
+  font-size: 1.1rem;
+  color: var(--color-text-light);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: calc(var(--spacing-unit) * 3);
+  margin-bottom: calc(var(--spacing-unit) * 4);
+}
+
+.info-card {
+  background-color: var(--color-background-light);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: calc(var(--spacing-unit) * 3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.info-card h2 {
+  color: var(--color-primary);
+  font-size: 1.4rem;
+  margin-bottom: var(--spacing-unit);
+}
+
+.info-card p {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+.card-link {
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+.card-link:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.welcome-message {
+  text-align: center;
+  font-style: italic;
+  margin-top: calc(var(--spacing-unit) * 4);
+  color: var(--color-text-light);
+}

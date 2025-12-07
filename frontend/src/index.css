@@ -1,0 +1,91 @@
+/* src/index.css */
+
+/* Reset Básico para consistencia entre navegadores */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Variables CSS para la paleta de colores y fuentes */
+:root {
+  --color-primary: #145495;
+  /* Azul Oscuro */
+  --color-secondary: #00A99D;
+  /* Aguamarina/Turquesa */
+  --color-accent: #007B80;
+  /* Acento/Hover Aguamarina */
+  --color-text-main: #333333;
+  /* Texto Principal Oscuro */
+  --color-text-light: #666666;
+  /* Texto Secundario/Gris */
+  --color-background-light: #F8F9FA;
+  /* Fondo Claro */
+  --color-border: #E0E0E0;
+  /* Bordes y Separadores */
+
+  --font-family-main: 'Montserrat', sans-serif;
+  --font-size-base: 16px;
+  --spacing-unit: 8px;
+  /* Unidad base para paddings y margins */
+}
+
+body {
+  font-family: var(--font-family-main);
+  font-size: var(--font-size-base);
+  color: var(--color-text-main);
+  background-color: var(--color-background-light);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: var(--color-secondary);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+/* Estilos de botones base */
+button {
+  background-color: var(--color-secondary);
+  color: white;
+  padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--color-accent);
+}
+
+/* Contenedor principal de la app */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* Asegura que la app ocupe toda la altura visible */
+}
+
+/* Visibilidad del buscador en áreas de contenido (fondo blanco) */
+.content-area .search-input,
+.home-page .search-input {
+  border: 1px solid var(--color-border);
+  background-color: #fff;
+  color: var(--color-text-main);
+}
+
+.content-area .search-input::placeholder,
+.home-page .search-input::placeholder {
+  color: var(--color-text-light);
+}
