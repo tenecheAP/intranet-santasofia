@@ -42,11 +42,11 @@ git status
 git commit -m "Initial commit - Sistema de Intranet v0.1.0"
 
 # Conectar con GitHub (reemplaza con tu URL)
-git remote add origin https://github.com/TU-USUARIO/intranet-sistema.git
+git remote add origin https://github.com/tenecheAP/intranet-sistema.git
 
 # Subir a GitHub
-git branch -M main
-git push -u origin main
+git branch -M Main
+git push -u origin Main
 ```
 
 ### 1.3 Verificar que se Subió Correctamente
