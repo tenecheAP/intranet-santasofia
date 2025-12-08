@@ -8,14 +8,23 @@
 
 .main-content-wrapper {
   display: flex;
-  flex: 1; /* Permite que el contenido principal ocupe el espacio restante */
+  flex: 1;
+  justify-content: center;
+  /* Center content */
+  background-color: #f4f6f8;
+  /* Un fondo global suave */
 }
 
 .content-area {
-  flex: 1; /* Ocupa el espacio restante después de la Sidebar */
-  padding: calc(var(--spacing-unit) * 3);
-  background-color: white; /* Contenido principal en blanco para contraste */
-  border-radius: 8px; /* Bordes ligeramente redondeados */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Sombra sutil */
-  margin: calc(var(--spacing-unit) * 2);
+  flex: 1;
+  width: 100%;
+  max-width: 1400px;
+  /* Ancho máximo para pantallas grandes */
+  padding: 0;
+  /* El padding lo manejan las páginas individualmente si es necesario, o global aquí */
+  background-color: transparent;
+  /* Remove background white box from container to let page handle it */
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
 }

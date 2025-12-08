@@ -6,6 +6,7 @@ import './Sidebar.css'; // Estilos específicos del Sidebar
 // Datos de ejemplo para el menú de la barra lateral (luego vendría de la DB)
 const menuItems = [
   { name: 'Inicio', path: '/' },
+  { name: '🚀 Aplicativos', path: '/aplicativos' },
   { name: 'Plataforma', path: '/plataforma' },
   { name: 'Políticas y Normas', path: '/politicas' },
   { name: 'Gestión de Calidad', path: '/gestion-calidad' },
@@ -23,8 +24,8 @@ function Sidebar() {
         <ul>
           {menuItems.map((item) => (
             <li key={item.name}>
-              <NavLink 
-                to={item.path} 
+              <NavLink
+                to={item.path}
                 className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
                 end={item.path === '/'}
               >

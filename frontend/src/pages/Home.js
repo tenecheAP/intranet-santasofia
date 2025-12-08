@@ -1,14 +1,31 @@
-// src/pages/Home.js
 import React from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
+import NewsCarousel from '../components/Home/NewsCarousel';
+import NewsSidebar from '../components/Home/NewsSidebar';
 
 function Home() {
   return (
     <div className="home-page">
-      <h1>Bienvenido a la Intranet De Santa Sofía</h1>
-      <p>Aquí encontrarás acceso a todos los recursos internos, políticas, manuales y herramientas necesarias para tu trabajo.</p>
-      
+      <div className="home-hero-grid">
+        <div className="hero-main">
+          <NewsCarousel />
+
+          <div className="welcome-section">
+            <h1>Bienvenido a la Intranet de Santa Sofía</h1>
+            <p>Accede a todos los recursos, noticias y aplicativos institucionales.</p>
+          </div>
+        </div>
+        <div className="hero-sidebar">
+          <NewsSidebar />
+        </div>
+      </div>
+
+      <div className="section-divider">
+        <h2>Accesos Rápidos</h2>
+        <hr />
+      </div>
+
       <div className="card-grid">
         <div className="info-card">
           <h2>Anuncios Recientes</h2>
