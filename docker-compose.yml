@@ -18,8 +18,11 @@ services:
     volumes:
       # Persistencia de los datos para que no se pierdan al apagar el contenedor
       - db-data:/var/lib/postgresql/data
+      # Scripts de inicialización (se ejecutan solo si la DB está vacía)
+      - ./backend/src/db/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./backend/src/db/seeds.sql:/docker-entrypoint-initdb.d/2-seeds.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user_intranet -d intranet_db"]
+      test: [ "CMD-SHELL", "pg_isready -U user_intranet -d intranet_db" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -28,7 +31,7 @@ services:
   # 2. Backend API (Node.js/Express - Lógica y Conexión a DB)
   # =======================================================
   api:
-    build: 
+    build:
       context: ./backend # Ubicación de tu Dockerfile para el Backend
     restart: always
     ports:
@@ -45,11 +48,11 @@ services:
     depends_on:
       # Espera a que la base de datos esté "saludable" antes de iniciar
       db:
-        condition: service_healthy 
+        condition: service_healthy
     # Mapeo de volumen para desarrollo: permite cambios en tiempo real
     volumes:
       - ./backend:/app
-      - /app/node_modules  # Volumen anónimo para preservar node_modules del contenedor
+      - /app/node_modules # Volumen anónimo para preservar node_modules del contenedor
 
   # =======================================================
   # 3. Frontend (React SPA - Servido por Nginx)
