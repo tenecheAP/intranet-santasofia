@@ -26,6 +26,8 @@ const APPS = [
   { id: 22, name: 'Softhia Plan Beneficios Contratos', url: 'http://amaltea/contratoPlanBeneficios/view/modules/login.php', description: 'Asocia contratos con planes de beneficios en el sistema Hosvital.' },
   { id: 23, name: 'Productividad Fonoaudiología y Psicología V.2', url: 'http://192.168.40.101/productividad/', description: 'Sistema de registro de productividad para Fonoaudiología y Psicología.' },
   { id: 24, name: 'Productividad Fisioterapia V.2', url: 'http://192.168.40.101/htdocs/prodfis/', description: 'Sistema de registro de productividad para Fisioterapia.' },
+  // Agregamos Mesa de Ayuda como un sistema más
+  { id: 99, name: 'Mesa de Ayuda', url: '/mesa-de-ayuda', description: 'Plataforma de soporte y gestión de requerimientos tecnológicos y administrativos.', internalLink: true },
 ];
 
 function Sistemas() {
@@ -64,14 +66,18 @@ function Sistemas() {
           <div className="info-card" key={app.id}>
             <h2>{app.id}. {app.name}</h2>
             <p>{app.description}</p>
-            <a href={app.url} target="_blank" rel="noopener noreferrer" className="card-link">Abrir</a>
+            {app.internalLink ? (
+              <Link to={app.url} className="card-link">Abrir</Link>
+            ) : (
+              <a href={app.url} target="_blank" rel="noopener noreferrer" className="card-link">Abrir</a>
+            )}
           </div>
         ))}
         {filtered.length === 0 && (
           <div className="info-card">
             <h2>Sin resultados</h2>
             <p>No se encontraron sistemas para tu búsqueda.</p>
-            <Link to="/sistemas" className="card-link">Ver todos</Link>
+            <button onClick={() => setQuery('')} className="card-link" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>Ver todos</button>
           </div>
         )}
       </div>

@@ -18,3 +18,11 @@ CREATE TABLE IF NOT EXISTS documentos (
     url VARCHAR(500),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Crear tabla de directorio
+CREATE TABLE IF NOT EXISTS directorio (
+    id SERIAL PRIMARY KEY,
+    departamento VARCHAR(255) NOT NULL,
+    extension VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

@@ -6,7 +6,7 @@ import Footer from './components/Layout/Footer';
 import Home from './pages/Home';
 import GPC from './pages/GPC';
 import Sistemas from './pages/Sistemas';
-import Aplicativos from './pages/Aplicativos';
+import HelpDesk from './pages/HelpDesk';
 import Documental from './pages/Documental';
 import Plataforma from './pages/Plataforma';
 import Historia from './pages/Historia';
@@ -55,7 +55,7 @@ function App() {
 
                 {/* Otros */}
                 <Route path="/sistemas" element={<Sistemas />} />
-                <Route path="/aplicativos" element={<Aplicativos />} />
+                <Route path="/mesa-de-ayuda" element={<HelpDesk />} />
                 <Route path="/documental" element={<Documental />} />
 
               </Routes>

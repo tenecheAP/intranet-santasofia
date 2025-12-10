@@ -51,6 +51,69 @@
 .header-actions {
   display: flex;
   align-items: center;
+  gap: 1rem;
+}
+
+.action-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  text-decoration: none;
+  color: white;
+  /* Icon will be white */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.action-icon-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.email-action {
+  background: linear-gradient(135deg, #ea4335, #c5221f);
+}
+
+.email-action:hover {
+  background: linear-gradient(135deg, #ff5a4d, #d93025);
+}
+
+.help-action {
+  background: linear-gradient(135deg, #0056b3, #004494);
+}
+
+.help-action:hover {
+  background: linear-gradient(135deg, #0069d9, #0056b3);
+}
+
+.directory-action {
+  background: linear-gradient(135deg, #34a853, #1e8e3e);
+}
+
+.directory-action:hover {
+  background: linear-gradient(135deg, #42b760, #28a745);
+}
+
+.apps-action {
+  background: linear-gradient(135deg, #fbbc04, #f57f17);
+}
+
+.apps-action:hover {
+  background: linear-gradient(135deg, #ffca28, #ff8f00);
+}
+
+.contingency-action {
+  background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+}
+
+.contingency-action:hover {
+  background: linear-gradient(135deg, #ba68c8, #9c27b0);
 }
 
 .user-action {

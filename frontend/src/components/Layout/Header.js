@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import LoginModal from '../Auth/LoginModal';
+import { Mail, Headphones, Phone, LayoutGrid, FileWarning } from 'lucide-react';
 import './Header.css';
 import logo from '../../assets/icons/logo-con-letras-fondo-blanco.png';
 
@@ -22,6 +23,48 @@ function Header() {
           </div>
         </div>
         <div className="header-actions">
+          <Link
+            to="/documental"
+            className="action-icon-btn contingency-action"
+            title="Formatos de Contingencia"
+          >
+            <FileWarning size={20} />
+          </Link>
+
+          <Link
+            to="/institucional/directorio"
+            className="action-icon-btn directory-action"
+            title="Directorio Telefónico"
+          >
+            <Phone size={20} />
+          </Link>
+
+          <Link
+            to="/sistemas"
+            className="action-icon-btn apps-action"
+            title="Sistemas y Aplicativos"
+          >
+            <LayoutGrid size={20} />
+          </Link>
+
+          <a
+            href="https://mail.google.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="action-icon-btn email-action"
+            title="Correo Institucional"
+          >
+            <Mail size={20} />
+          </a>
+
+          <Link
+            to="/mesa-de-ayuda"
+            className="action-icon-btn help-action"
+            title="Mesa de Ayuda"
+          >
+            <Headphones size={20} />
+          </Link>
+
           {user ? (
             <div className="user-menu-container" onMouseLeave={() => setShowUserMenu(false)}>
               <button className="user-action logged-in" onClick={() => setShowUserMenu(!showUserMenu)}>

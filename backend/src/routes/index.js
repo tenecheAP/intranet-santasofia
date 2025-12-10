@@ -1,7 +1,9 @@
 const { Router } = require('express');
 const router = Router();
 const healthController = require('../controllers/health.controller');
+const directoryRoutes = require('./directory.routes');
 
+router.use('/directory', directoryRoutes);
 router.get('/health', healthController.health);
 router.get('/gpc', (req, res) => {
   res.json({ items: [] });
