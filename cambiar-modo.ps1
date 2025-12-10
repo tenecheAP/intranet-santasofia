@@ -1,4 +1,5 @@
-param (
+status
+sparam (
     [Parameter(Mandatory = $false)]
     [ValidateSet("dev", "prod")]
     [string]$UnicoModo
