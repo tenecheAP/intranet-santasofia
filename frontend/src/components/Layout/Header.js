@@ -72,6 +72,7 @@ function Header() {
               </button>
               {showUserMenu && (
                 <div className="user-dropdown">
+                  <Link to="/admin/slider" className="dropdown-item">Gestionar Slider</Link>
                   <button onClick={logout}>Cerrar Sesión</button>
                 </div>
               )}

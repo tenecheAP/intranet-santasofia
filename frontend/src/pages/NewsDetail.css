@@ -1,0 +1,236 @@
+/* NewsDetail.css - Premium Magazine Style */
+
+.news-detail-page {
+    padding: 3rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.news-detail-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 350px;
+    /* Content takes precedence, Sidebar fixed width */
+    gap: 4rem;
+    align-items: start;
+}
+
+/* Back Navigation */
+.back-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #495057;
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    padding: 0.5rem 1rem;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.back-nav:hover {
+    background: #e9ecef;
+    transform: translateX(-2px);
+}
+
+/* Article Styling */
+.detail-content {
+    background: white;
+    padding: 4rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+}
+
+.article-header {
+    margin-bottom: 2.5rem;
+    text-align: left;
+}
+
+.article-header h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+    color: #1a1a1a;
+    margin: 0 0 1.5rem;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+}
+
+.article-meta {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    color: #6c757d;
+    font-size: 0.95rem;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 1rem 0;
+}
+
+.article-meta .date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.article-meta .author {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #0056b3;
+    font-weight: 600;
+}
+
+/* Feature Image */
+.article-image {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: 3rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Typography for Article Body */
+.article-body {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: #2c3e50;
+    max-width: 100%;
+    /* Ensure text wraps */
+}
+
+.article-body p {
+    margin-bottom: 1.8rem;
+}
+
+.article-body p:first-of-type {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #495057;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+}
+
+/* Drop key for first letter - optional styling hook */
+/* .article-body p:first-of-type::first-letter {
+    font-size: 3.5em;
+    font-weight: bold;
+    float: left;
+    margin-right: 0.5rem;
+    line-height: 0.8;
+} */
+
+/* Sidebar Styling */
+.detail-sidebar {
+    position: sticky;
+    top: 2rem;
+}
+
+.sidebar-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.detail-sidebar h3 {
+    margin: 0 0 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #0056b3;
+    color: #1a1a1a;
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.sidebar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.sidebar-item {
+    display: flex;
+    gap: 1rem;
+    text-decoration: none;
+    color: inherit;
+    group: transition;
+}
+
+.sidebar-thumb {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.sidebar-item:hover .sidebar-thumb {
+    transform: scale(1.05);
+}
+
+.sidebar-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sidebar-info h4 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    color: #2c3e50;
+    line-height: 1.4;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.sidebar-item:hover .sidebar-info h4 {
+    color: #0056b3;
+}
+
+.sidebar-date {
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .news-detail-layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .detail-content {
+        padding: 2.5rem;
+    }
+
+    .article-header h1 {
+        font-size: 2.25rem;
+    }
+
+    .detail-sidebar {
+        position: static;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .news-detail-layout {
+        display: flex;
+        flex-direction: column;
+    }
+}

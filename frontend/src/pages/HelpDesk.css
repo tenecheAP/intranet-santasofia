@@ -41,66 +41,99 @@
     border-radius: 0 8px 8px 0;
 }
 
+/* ... existing styles ... */
+
 .help-desk-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
-    margin-top: 2rem;
+    margin-bottom: 3rem;
+    /* Spacing before description */
 }
 
 .help-desk-item {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    /* Stack icon and text */
+    justify-content: center;
     align-items: center;
+    text-align: center;
     background-color: white;
-    padding: 1.5rem;
+    padding: 2rem;
     border: 1px solid #e2e8f0;
-    border-radius: 12px;
+    border-radius: 16px;
+    /* Softer rounded corners */
     text-decoration: none;
     color: var(--color-text-main);
-    font-weight: 500;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.help-desk-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .help-desk-item:hover {
-    transform: translateY(-2px);
-    border-color: var(--color-secondary);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: transparent;
+}
+
+.help-desk-item:hover::before {
+    opacity: 1;
+}
+
+.desk-icon {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.help-desk-item:hover .desk-icon {
+    transform: scale(1.1);
     color: var(--color-secondary);
 }
 
 .desk-name {
-    flex: 1;
-    margin-right: 1rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.4;
+    margin-bottom: 0.5rem;
+    flex: 1;
+    /* Allow growing */
+    display: flex;
+    align-items: center;
 }
 
 .external-icon {
-    color: #a0aec0;
-    transition: color 0.2s;
+    color: #cbd5e0;
+    margin-top: auto;
+    /* Push to bottom if content is short */
+    opacity: 0.5;
+    transition: all 0.2s;
 }
 
 .help-desk-item:hover .external-icon {
     color: var(--color-secondary);
+    opacity: 1;
 }
 
-.manual-item {
-    border-color: #bee3f8;
-    background-color: #ebf8ff;
+/* Specific styling for Manual Item if needed, or keep generic but colored */
+.manual-item .desk-icon {
+    color: #3182ce;
 }
 
-.manual-item:hover {
-    background-color: #bee3f8;
-    border-color: #4299e1;
-    color: #2b6cb0;
-}
-
-.manual-item .external-icon {
-    color: #4299e1;
-}
-
-.manual-item:hover .external-icon {
+.manual-item:hover .desk-icon {
     color: #2b6cb0;
 }

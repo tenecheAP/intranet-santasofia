@@ -22,6 +22,29 @@ function Home() {
       </div>
 
       <div className="section-divider">
+        <h2>Noticias Destacadas</h2>
+        <hr />
+        <p className="section-subtitle">Lo último que sucede en nuestra institución</p>
+      </div>
+
+      {/* We reuse the logic but in a grid format, or could be a NEW component */}
+      {/* For now, let's link to the full news page prominently */}
+      <div className="news-preview-banner" style={{ textAlign: 'center', marginBottom: '3rem' }}>
+        <Link to="/noticias" className="btn-primary" style={{
+          display: 'inline-block',
+          padding: '1rem 2rem',
+          backgroundColor: '#0056b3',
+          color: 'white',
+          borderRadius: '8px',
+          textDecoration: 'none',
+          fontWeight: 'bold',
+          fontSize: '1.1rem'
+        }}>
+          📰 Ver Todas las Noticias Institucionales
+        </Link>
+      </div>
+
+      <div className="section-divider">
         <h2>Accesos Rápidos</h2>
         <hr />
       </div>
@@ -40,7 +63,7 @@ function Home() {
         <div className="info-card">
           <h2>Documentos Clave</h2>
           <p>Encuentra políticas, procedimientos, manuales y guías de práctica clínica.</p>
-          <a href="#" className="card-link">Ver Documentos</a>
+          <Link to="/documental" className="card-link">Ver Documentos</Link>
         </div>
       </div>
 

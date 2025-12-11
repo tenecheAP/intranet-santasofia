@@ -20,6 +20,11 @@ import TalentoHumano from './pages/TalentoHumano';
 import Juridica from './pages/Juridica';
 import Financiera from './pages/Financiera';
 import PlaceholderPage from './pages/PlaceholderPage';
+import SliderAdmin from './pages/SliderAdmin';
+import AnuncioPage from './pages/AnuncioPage';
+import NewsPage from './pages/NewsPage';
+import NewsAdmin from './pages/NewsAdmin';
+import NewsDetail from './pages/NewsDetail';
 import './App.css';
 
 function App() {
@@ -57,6 +62,10 @@ function App() {
                 <Route path="/sistemas" element={<Sistemas />} />
                 <Route path="/mesa-de-ayuda" element={<HelpDesk />} />
                 <Route path="/documental" element={<Documental />} />
+
+                {/* Admin & Dynamic Content */}
+                <Route path="/admin/slider" element={<SliderAdmin />} />
+                <Route path="/anuncio/:id" element={<AnuncioPage />} />
 
               </Routes>
             </main>

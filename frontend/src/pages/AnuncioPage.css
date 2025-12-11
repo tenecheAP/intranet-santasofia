@@ -1,0 +1,61 @@
+.anuncio-page {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    min-height: 80vh;
+}
+
+.anuncio-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.anuncio-image {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 1.5rem;
+}
+
+.anuncio-header h1 {
+    font-size: 2.5rem;
+    color: #333;
+    padding: 0 1rem;
+}
+
+.anuncio-content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444;
+    padding: 2rem;
+}
+
+.anuncio-footer {
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid #eee;
+}
+
+.back-button {
+    background-color: var(--primary-color, #012d6a);
+    color: white;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.back-button:hover {
+    background-color: #0d3b82;
+}
+
+.loading, .error-container {
+    text-align: center;
+    padding: 4rem;
+    font-size: 1.2rem;
+}

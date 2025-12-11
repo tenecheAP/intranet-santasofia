@@ -1,63 +1,93 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './NewsCarousel.css';
 
-const newsData = [
-    {
-        id: 1,
-        title: 'La Universidad presenta el Protocolo de Atención al Ciudadano',
-        image: 'https://via.placeholder.com/800x400?text=Protocolo+Atencion', // Placeholder or use imports
-        summary: 'Nuevo lineamiento para mejorar nuestra atención.'
-    },
-    {
-        id: 2,
-        title: 'Flash Informativo: Actualización de Sistemas',
-        image: 'https://via.placeholder.com/800x400?text=Actualizacion+Sistemas',
-        summary: 'Mantenimiento programado para el fin de semana.'
-    },
-    {
-        id: 3,
-        title: 'Celebración del Día del Docente',
-        image: 'https://via.placeholder.com/800x400?text=Dia+del+Docente',
-        summary: 'Únete a nosotros en el auditorio principal.'
-    }
-];
-
 function NewsCarousel() {
+    const [slides, setSlides] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % newsData.length);
-        }, 5000); // Change slide every 5 seconds
-        return () => clearInterval(interval);
+        fetchSlides();
     }, []);
+
+    const fetchSlides = async () => {
+        try {
+            const response = await fetch('/slider');
+            if (response.ok) {
+                const data = await response.json();
+                setSlides(data.filter(s => s.activo));
+            }
+        } catch (error) {
+            console.error('Error loading slides:', error);
+        }
+    };
+
+    useEffect(() => {
+        if (slides.length <= 1) return;
+
+        const interval = setInterval(() => {
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [slides]);
 
     const goToSlide = (index) => {
         setCurrentIndex(index);
     };
 
+    const handleSlideClick = (slide) => {
+        if (slide.es_interno) {
+            navigate(`/anuncio/${slide.id}`);
+        } else if (slide.link) {
+            // Check if link is absolute or relative document
+            if (slide.link.startsWith('http')) {
+                window.open(slide.link, '_blank');
+            } else {
+                // If it's a relative path (e.g. /documentos/...), open in new tab
+                window.open(slide.link, '_blank');
+            }
+        }
+    };
+
+    if (slides.length === 0) return null;
+
     return (
         <div className="news-carousel">
             <div className="carousel-inner" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-                {newsData.map((news) => (
-                    <div className="carousel-item" key={news.id}>
-                        <img src={news.image} alt={news.title} className="carousel-image" />
+                {slides.map((slide) => (
+                    <div
+                        className="carousel-item"
+                        key={slide.id}
+                        onClick={() => handleSlideClick(slide)}
+                        style={{ cursor: 'pointer' }}
+                    >
+                        <img
+                            src={slide.imagen_url.startsWith('http') ? slide.imagen_url : slide.imagen_url}
+                            alt={slide.titulo}
+                            className="carousel-image"
+                        />
                         <div className="carousel-caption">
-                            <h3>{news.title}</h3>
-                            <p>{news.summary}</p>
+                            <h3>{slide.titulo}</h3>
+                            <p>{slide.resumen}</p>
                         </div>
                     </div>
                 ))}
             </div>
-            <div className="carousel-indicators">
-                {newsData.map((_, index) => (
-                    <button
-                        key={index}
-                        className={`indicator ${currentIndex === index ? 'active' : ''}`}
-                        onClick={() => goToSlide(index)}
-                    ></button>
-                ))}
-            </div>
+            {slides.length > 1 && (
+                <div className="carousel-indicators">
+                    {slides.map((_, index) => (
+                        <button
+                            key={index}
+                            className={`indicator ${currentIndex === index ? 'active' : ''}`}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                goToSlide(index);
+                            }}
+                        ></button>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

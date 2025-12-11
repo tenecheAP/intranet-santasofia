@@ -26,3 +26,28 @@ CREATE TABLE IF NOT EXISTS directorio (
     extension VARCHAR(100) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Crear tabla de anuncios
+CREATE TABLE IF NOT EXISTS anuncios (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(200) NOT NULL,
+    imagen_url VARCHAR(500) NOT NULL,
+    link VARCHAR(500),
+    es_interno BOOLEAN DEFAULT FALSE,
+    contenido TEXT,
+    resumen VARCHAR(500),
+    orden INTEGER DEFAULT 0,
+    activo BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Crear tabla de noticias
+CREATE TABLE IF NOT EXISTS noticias (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(200) NOT NULL,
+    contenido TEXT NOT NULL,
+    imagen_url VARCHAR(500),
+    fecha_publicacion DATE DEFAULT CURRENT_DATE,
+    autor VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
