@@ -1,4 +1,5 @@
-const baseUrl = ''; // Removed process.env.REACT_APP_API_URL usage to rely on proxy
+// Usar variable de entorno si está disponible, sino usar proxy (para desarrollo local)
+const baseUrl = process.env.REACT_APP_API_URL || '';
 
 const request = async (method, path, body = null) => {
   const options = {
@@ -12,7 +13,9 @@ const request = async (method, path, body = null) => {
     options.body = JSON.stringify(body);
   }
 
-  const response = await fetch(path, options);
+  // Construir la URL completa: baseUrl + path
+  const url = baseUrl ? `${baseUrl}${path}` : path;
+  const response = await fetch(url, options);
 
   if (!response.ok) {
     const errorBody = await response.text();

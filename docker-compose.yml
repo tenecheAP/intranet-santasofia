@@ -73,6 +73,8 @@ services:
       # Necesario para que React detecte cambios en Docker sobre Windows
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
+      # URL de la API usando el nombre del servicio Docker
+      - REACT_APP_API_URL=http://localhost:3001
     depends_on:
       - api
 

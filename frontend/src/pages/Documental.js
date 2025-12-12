@@ -1,51 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import * as documentsService from '../services/api/documents.service';
 import './Documental.css';
-
-const initialDocumentData = {
-    'Gestión de Calidad': [
-        { id: 1, title: 'Política de Calidad Institucional', type: 'PDF', date: '2023-10-01', url: '' },
-        { id: 2, title: 'Manual de Procesos y Procedimientos', type: 'PDF', date: '2023-09-15', url: '' },
-        { id: 3, title: 'Mapa de Procesos 2024', type: 'IMG', date: '2023-11-20', url: '' },
-    ],
-    'Talento Humano': [
-        { id: 4, title: 'Reglamento Interno de Trabajo', type: 'PDF', date: '2022-05-10', url: '' },
-        { id: 5, title: 'Formato de Solicitud de Permisos', type: 'DOCX', date: '2023-01-20', url: '' },
-        { id: 6, title: 'Cronograma de Capacitaciones 2024', type: 'XLSX', date: '2023-12-05', url: '' },
-    ],
-    'Jurídica': [
-        { id: 7, title: 'Circular Normativa 001', type: 'PDF', date: '2024-01-15', url: '' },
-        { id: 8, title: 'Resolución de Nombramientos', type: 'PDF', date: '2023-11-30', url: '' },
-    ],
-    'Contratación': [
-        { id: 9, title: 'Manual de Contratación', type: 'PDF', date: '2023-08-10', url: '' },
-        { id: 10, title: 'Formatos de Minutas', type: 'ZIP', date: '2023-08-12', url: '' },
-    ]
-};
 
 function Documental() {
     const { user } = useAuth();
     const [searchTerm, setSearchTerm] = useState('');
     const [activeCategory, setActiveCategory] = useState('Todas');
-    const [docsData, setDocsData] = useState(initialDocumentData);
+    const [documents, setDocuments] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
     const [editingDoc, setEditingDoc] = useState(null);
 
     // New Document State
     const [newDoc, setNewDoc] = useState({
-        title: '',
-        category: 'Gestión de Calidad',
-        type: 'PDF',
-        date: new Date().toISOString().split('T')[0],
+        titulo: '',
+        categoria: 'Gestión de Calidad',
+        tipo: 'PDF',
+        fecha: new Date().toISOString().split('T')[0],
         url: ''
     });
 
     useEffect(() => {
-        const storedDocs = localStorage.getItem('documentData');
-        if (storedDocs) {
-            setDocsData(JSON.parse(storedDocs));
-        }
+        loadDocuments();
     }, []);
+
+    const loadDocuments = async () => {
+        try {
+            setLoading(true);
+            const data = await documentsService.getDocuments();
+            setDocuments(data);
+            setError(null);
+        } catch (err) {
+            console.error('Error loading documents:', err);
+            setError('Error al cargar los documentos');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     // Helper to map categories to folder paths
     const getFolderByCategory = (category) => {
@@ -53,7 +46,6 @@ function Documental() {
             .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove accents
             .replace(/ /g, "-"); // Replace spaces with dashes
 
-        // Manual overrides for specific folders if needed, otherwise use normalized name
         const map = {
             'gestion-de-calidad': 'calidad',
             'talento-humano': 'talento-humano',
@@ -67,86 +59,57 @@ function Documental() {
     const handleFileSelect = (e) => {
         const file = e.target.files[0];
         if (file) {
-            // Check if user has selected a category, if not default to 'calidad' logic or current
-            const folder = getFolderByCategory(newDoc.category);
-
-            // Construct the path
-            // We keep the original filename including spaces
+            const folder = getFolderByCategory(newDoc.categoria);
             const path = `/documentos/${folder}/${file.name}`;
 
             setNewDoc({
                 ...newDoc,
                 url: path,
-                // Also auto-suggest title if empty
-                title: newDoc.title || file.name.split('.')[0]
+                titulo: newDoc.titulo || file.name.split('.')[0]
             });
         }
     };
 
-    const handleAddDocument = (e) => {
+    const handleAddDocument = async (e) => {
         e.preventDefault();
-        const category = newDoc.category;
-
-        if (editingDoc) {
-            // Editing existing document
-            const updatedDocs = { ...docsData };
-            const oldCategory = Object.keys(updatedDocs).find(cat =>
-                updatedDocs[cat].some(doc => doc.id === editingDoc.id)
-            );
-
-            if (oldCategory === category) {
-                updatedDocs[category] = updatedDocs[category].map(doc =>
-                    doc.id === editingDoc.id ? { ...newDoc, id: editingDoc.id } : doc
-                );
+        try {
+            if (editingDoc) {
+                await documentsService.updateDocument(editingDoc.id, newDoc);
+                alert('Documento actualizado correctamente.');
             } else {
-                updatedDocs[oldCategory] = updatedDocs[oldCategory].filter(doc => doc.id !== editingDoc.id);
-                if (!updatedDocs[category]) {
-                    updatedDocs[category] = [];
-                }
-                updatedDocs[category] = [{ ...newDoc, id: editingDoc.id }, ...updatedDocs[category]];
+                await documentsService.createDocument(newDoc);
+                alert('Documento agregado correctamente.');
             }
-
-            setDocsData(updatedDocs);
-            localStorage.setItem('documentData', JSON.stringify(updatedDocs));
-            alert('Documento actualizado correctamente.');
-        } else {
-            // Adding new document
-            const newId = Date.now();
-            const documentToAdd = { ...newDoc, id: newId };
-
-            const updatedDocs = { ...docsData };
-            if (!updatedDocs[category]) {
-                updatedDocs[category] = [];
-            }
-            updatedDocs[category] = [documentToAdd, ...updatedDocs[category]];
-
-            setDocsData(updatedDocs);
-            localStorage.setItem('documentData', JSON.stringify(updatedDocs));
-            alert('Documento agregado correctamente.');
+            loadDocuments();
+            closeModal();
+        } catch (err) {
+            console.error('Error saving document:', err);
+            alert('Error al guardar el documento');
         }
-
-        closeModal();
     };
 
-    const handleEditDocument = (doc, category) => {
+    const handleEditDocument = (doc) => {
         setEditingDoc(doc);
         setNewDoc({
-            title: doc.title,
-            category: category,
-            type: doc.type,
-            date: doc.date,
+            titulo: doc.titulo,
+            categoria: doc.categoria,
+            tipo: doc.tipo,
+            fecha: doc.fecha,
             url: doc.url || ''
         });
         setIsUploadModalOpen(true);
     };
 
-    const handleDeleteDocument = (docId, category) => {
+    const handleDeleteDocument = async (docId) => {
         if (window.confirm('¿Estás seguro de que deseas eliminar este documento?')) {
-            const updatedDocs = { ...docsData };
-            updatedDocs[category] = updatedDocs[category].filter(doc => doc.id !== docId);
-            setDocsData(updatedDocs);
-            localStorage.setItem('documentData', JSON.stringify(updatedDocs));
-            alert('Documento eliminado correctamente.');
+            try {
+                await documentsService.deleteDocument(docId);
+                alert('Documento eliminado correctamente.');
+                loadDocuments();
+            } catch (err) {
+                console.error('Error deleting document:', err);
+                alert('Error al eliminar el documento');
+            }
         }
     };
 
@@ -154,54 +117,46 @@ function Documental() {
         setIsUploadModalOpen(false);
         setEditingDoc(null);
         setNewDoc({
-            title: '',
-            category: 'Gestión de Calidad',
-            type: 'PDF',
-            date: new Date().toISOString().split('T')[0],
+            titulo: '',
+            categoria: 'Gestión de Calidad',
+            tipo: 'PDF',
+            fecha: new Date().toISOString().split('T')[0],
             url: ''
         });
     };
 
-    const categories = ['Todas', ...Object.keys(docsData)];
-    const availableCategories = Object.keys(docsData);
+    // Get unique categories from documents
+    const categories = ['Todas', ...new Set(documents.map(doc => doc.categoria))];
+    const availableCategories = [...new Set(documents.map(doc => doc.categoria))];
 
     const getFilteredDocuments = () => {
-        let docs = [];
-        let docsByCategory = {};
+        let filteredDocs = documents;
 
-        if (activeCategory === 'Todas') {
-            Object.entries(docsData).forEach(([category, categoryDocs]) => {
-                categoryDocs.forEach(doc => {
-                    docs.push(doc);
-                    docsByCategory[doc.id] = category;
-                });
-            });
-        } else {
-            docs = docsData[activeCategory] || [];
-            docs.forEach(doc => {
-                docsByCategory[doc.id] = activeCategory;
-            });
+        if (activeCategory !== 'Todas') {
+            filteredDocs = filteredDocs.filter(doc => doc.categoria === activeCategory);
         }
 
         if (searchTerm) {
-            docs = docs.filter(doc =>
-                doc.title.toLowerCase().includes(searchTerm.toLowerCase())
+            filteredDocs = filteredDocs.filter(doc =>
+                doc.titulo.toLowerCase().includes(searchTerm.toLowerCase())
             );
         }
-        return { docs, docsByCategory };
+
+        return filteredDocs;
     };
 
-    const { docs: filteredDocs, docsByCategory } = getFilteredDocuments();
+    const filteredDocs = getFilteredDocuments();
 
     const handleDownload = (doc) => {
         if (doc.url) {
-            // Encode the URL to handle spaces and special characters
             const encodedUrl = encodeURI(doc.url);
             window.open(encodedUrl, '_blank');
         } else {
             alert('Este documento no tiene un enlace configurado.');
         }
     };
+
+    if (loading) return <div className="loading-state">Cargando documentos...</div>;
 
     return (
         <div className="documental-page">
@@ -229,6 +184,8 @@ function Documental() {
                 </div>
             </div>
 
+            {error && <div className="error-message">{error}</div>}
+
             {/* Upload Modal */}
             {isUploadModalOpen && (
                 <div className="modal-overlay">
@@ -242,10 +199,13 @@ function Documental() {
                             <div className="form-group">
                                 <label>Categoría *</label>
                                 <select
-                                    value={newDoc.category}
-                                    onChange={(e) => setNewDoc({ ...newDoc, category: e.target.value })}
+                                    value={newDoc.categoria}
+                                    onChange={(e) => setNewDoc({ ...newDoc, categoria: e.target.value })}
                                 >
-                                    {availableCategories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                                    <option value="Gestión de Calidad">Gestión de Calidad</option>
+                                    <option value="Talento Humano">Talento Humano</option>
+                                    <option value="Jurídica">Jurídica</option>
+                                    <option value="Contratación">Contratación</option>
                                 </select>
                             </div>
 
@@ -254,8 +214,8 @@ function Documental() {
                                 <input
                                     type="text"
                                     required
-                                    value={newDoc.title}
-                                    onChange={(e) => setNewDoc({ ...newDoc, title: e.target.value })}
+                                    value={newDoc.titulo}
+                                    onChange={(e) => setNewDoc({ ...newDoc, titulo: e.target.value })}
                                     placeholder="Ej: Manual de Procedimientos 2024"
                                 />
                             </div>
@@ -299,8 +259,8 @@ function Documental() {
                             <div className="form-group">
                                 <label>Tipo de Archivo *</label>
                                 <select
-                                    value={newDoc.type}
-                                    onChange={(e) => setNewDoc({ ...newDoc, type: e.target.value })}
+                                    value={newDoc.tipo}
+                                    onChange={(e) => setNewDoc({ ...newDoc, tipo: e.target.value })}
                                 >
                                     <option value="PDF">PDF</option>
                                     <option value="DOCX">Word (DOCX)</option>
@@ -360,7 +320,7 @@ function Documental() {
                                             className="doc-edit-btn"
                                             onClick={(e) => {
                                                 e.stopPropagation();
-                                                handleEditDocument(doc, docsByCategory[doc.id]);
+                                                handleEditDocument(doc);
                                             }}
                                             title="Editar documento"
                                         >
@@ -370,7 +330,7 @@ function Documental() {
                                             className="doc-delete-btn"
                                             onClick={(e) => {
                                                 e.stopPropagation();
-                                                handleDeleteDocument(doc.id, docsByCategory[doc.id]);
+                                                handleDeleteDocument(doc.id);
                                             }}
                                             title="Eliminar documento"
                                         >
@@ -378,13 +338,13 @@ function Documental() {
                                         </button>
                                     </div>
                                 )}
-                                <div className={`doc-icon type-${doc.type.toLowerCase()}`}>
-                                    <i className={`fas ${doc.type === 'IMG' ? 'fa-image' : 'fa-file-alt'}`}></i>
-                                    <span className="doc-type">{doc.type}</span>
+                                <div className={`doc-icon type-${doc.tipo.toLowerCase()}`}>
+                                    <i className={`fas ${doc.tipo === 'IMG' ? 'fa-image' : 'fa-file-alt'}`}></i>
+                                    <span className="doc-type">{doc.tipo}</span>
                                 </div>
                                 <div className="doc-info">
-                                    <h4>{doc.title}</h4>
-                                    <span className="doc-date"><i className="far fa-calendar-alt"></i> {doc.date}</span>
+                                    <h4>{doc.titulo}</h4>
+                                    <span className="doc-date"><i className="far fa-calendar-alt"></i> {doc.fecha}</span>
                                 </div>
                                 <button
                                     className="doc-download-btn"

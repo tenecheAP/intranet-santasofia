@@ -1,10 +1,9 @@
+import client from './client';
+
 const getNews = async () => {
     try {
-        const response = await fetch('/news');
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return await response.json();
+        const response = await client.get('/news');
+        return response.data;
     } catch (error) {
         console.error('Error fetching news:', error);
         throw error;
@@ -13,11 +12,8 @@ const getNews = async () => {
 
 const getNewsById = async (id) => {
     try {
-        const response = await fetch(`/news/${id}`);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return await response.json();
+        const response = await client.get(`/news/${id}`);
+        return response.data;
     } catch (error) {
         console.error('Error fetching news:', error);
         throw error;
@@ -26,17 +22,8 @@ const getNewsById = async (id) => {
 
 const createNews = async (news) => {
     try {
-        const response = await fetch('/news', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(news),
-        });
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return await response.json();
+        const response = await client.post('/news', news);
+        return response.data;
     } catch (error) {
         console.error('Error creating news:', error);
         throw error;
@@ -45,17 +32,8 @@ const createNews = async (news) => {
 
 const updateNews = async (id, news) => {
     try {
-        const response = await fetch(`/news/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(news),
-        });
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return await response.json();
+        const response = await client.put(`/news/${id}`, news);
+        return response.data;
     } catch (error) {
         console.error('Error updating news:', error);
         throw error;
@@ -64,13 +42,8 @@ const updateNews = async (id, news) => {
 
 const deleteNews = async (id) => {
     try {
-        const response = await fetch(`/news/${id}`, {
-            method: 'DELETE',
-        });
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return await response.json();
+        const response = await client.delete(`/news/${id}`);
+        return response.data;
     } catch (error) {
         console.error('Error deleting news:', error);
         throw error;

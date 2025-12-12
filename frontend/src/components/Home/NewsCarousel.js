@@ -13,7 +13,9 @@ function NewsCarousel() {
 
     const fetchSlides = async () => {
         try {
-            const response = await fetch('/slider');
+            const baseUrl = process.env.REACT_APP_API_URL || '';
+            const url = `${baseUrl}/slider`;
+            const response = await fetch(url);
             if (response.ok) {
                 const data = await response.json();
                 setSlides(data.filter(s => s.activo));

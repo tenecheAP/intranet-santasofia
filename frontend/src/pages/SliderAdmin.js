@@ -24,7 +24,9 @@ function SliderAdmin() {
 
     const fetchSlides = async () => {
         try {
-            const response = await fetch('/slider');
+            const baseUrl = process.env.REACT_APP_API_URL || '';
+            const url = `${baseUrl}/slider`;
+            const response = await fetch(url);
             const data = await response.json();
             setSlides(data);
         } catch (error) {
@@ -57,7 +59,8 @@ function SliderAdmin() {
         }
 
         try {
-            const url = editingId ? `/slider/${editingId}` : '/slider';
+            const baseUrl = process.env.REACT_APP_API_URL || '';
+            const url = editingId ? `${baseUrl}/slider/${editingId}` : `${baseUrl}/slider`;
             const method = editingId ? 'PUT' : 'POST';
 
             const response = await fetch(url, {
@@ -103,7 +106,8 @@ function SliderAdmin() {
     const handleDelete = async (id) => {
         if (!window.confirm('¿Seguro que deseas eliminar este anuncio?')) return;
         try {
-            await fetch(`/slider/${id}`, { method: 'DELETE' });
+            const baseUrl = process.env.REACT_APP_API_URL || '';
+            await fetch(`${baseUrl}/slider/${id}`, { method: 'DELETE' });
             fetchSlides();
         } catch (error) {
             console.error('Error deleting:', error);
