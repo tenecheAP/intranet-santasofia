@@ -83,10 +83,12 @@ function SliderAdmin() {
                 setImageFile(null);
                 fetchSlides();
             } else {
-                alert('Error al guardar');
+                const errorData = await response.json();
+                alert(`Error al guardar: ${errorData.error || response.statusText}\n${errorData.details || ''}`);
             }
         } catch (error) {
             console.error('Error:', error);
+            alert('Error de conexión o del servidor');
         }
     };
 

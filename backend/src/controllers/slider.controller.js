@@ -41,7 +41,19 @@ const create = async (req, res) => {
     try {
         const query = `INSERT INTO anuncios (titulo, imagen_url, link, es_interno, contenido, resumen, orden, activo) 
              VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`;
-        const values = [titulo, imagen_url, link, es_interno === 'true', contenido, resumen, orden || 0, activo === 'true'];
+
+        // Parse values safely
+        const ordenVal = parseInt(orden, 10);
+        const values = [
+            titulo,
+            imagen_url,
+            link || '',
+            es_interno === 'true',
+            contenido || '',
+            resumen || '',
+            isNaN(ordenVal) ? 0 : ordenVal,
+            activo === 'true'
+        ];
 
         console.log('Executing query:', query);
         console.log('With values:', values);
