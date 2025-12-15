@@ -70,3 +70,38 @@
 .indicator.active {
     background: white;
 }
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.carousel-control:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-control.prev {
+    left: 1rem;
+    padding-right: 3px;
+    /* Visual adjustment for arrow symbol center */
+}
+
+.carousel-control.next {
+    right: 1rem;
+    padding-left: 3px;
+}

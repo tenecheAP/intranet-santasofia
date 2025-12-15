@@ -36,12 +36,43 @@ function SliderAdmin() {
         }
     };
 
+    const getDefaultTemplate = (title) => {
+        return `
+<div class="article-content">
+  <p class="lead">Escribe aquí la introducción del anuncio ${title || '...'}</p>
+
+  <div class="info-box">
+    <strong>Información Importante:</strong> Destacado del anuncio.
+  </div>
+
+  <h2>Detalles</h2>
+  <p>Contenido principal del anuncio. Puedes añadir párrafos, listas e imágenes.</p>
+  
+  <ul class="feature-list">
+    <li>Punto clave 1</li>
+    <li>Punto clave 2</li>
+  </ul>
+
+  <h3>Más Información</h3>
+  <p>Contacte al área responsable para más detalles.</p>
+</div>`.trim();
+    };
+
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
+
+        if (name === 'es_interno' && checked && !formData.contenido) {
+            setFormData(prev => ({
+                ...prev,
+                [name]: checked,
+                contenido: getDefaultTemplate(prev.titulo)
+            }));
+        } else {
+            setFormData(prev => ({
+                ...prev,
+                [name]: type === 'checkbox' ? checked : value
+            }));
+        }
     };
 
     const handleFileChange = (e) => {
@@ -221,7 +252,7 @@ function SliderAdmin() {
                             <tr key={slide.id}>
                                 <td>
                                     <img
-                                        src={slide.imagen_url ? (slide.imagen_url.startsWith('http') ? slide.imagen_url : slide.imagen_url) : ''}
+                                        src={slide.imagen_url ? (slide.imagen_url.startsWith('http') ? slide.imagen_url : `${process.env.REACT_APP_API_URL || ''}${slide.imagen_url}`) : ''}
                                         alt="thumb"
                                         className="table-thumb"
                                     />

@@ -25,6 +25,13 @@ const NewsPage = () => {
         }
     };
 
+    const stripHtml = (html) => {
+        if (!html) return '';
+        const tmp = document.createElement("DIV");
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || "";
+    };
+
     if (loading) return (
         <div className="loading-container">
             <div className="spinner"></div>
@@ -51,16 +58,14 @@ const NewsPage = () => {
                         key={item.id}
                         className="news-card"
                         style={{ textDecoration: 'none', color: 'inherit' }}
-                        target="_blank"
-                        rel="noopener noreferrer"
                     >
                         <div className="news-image">
                             <img
-                                src={item.imagen_url || 'https://via.placeholder.com/600x400?text=Noticias+Institucionales'}
+                                src={item.imagen_url ? (item.imagen_url.startsWith('http') ? item.imagen_url : `${process.env.REACT_APP_API_URL || ''}${item.imagen_url}`) : 'https://via.placeholder.com/600x400?text=Noticias+Institucionales'}
                                 alt={item.titulo}
                                 onError={(e) => {
                                     e.target.onerror = null;
-                                    e.target.src = 'https://via.placeholder.com/600x400?text=Intranet';
+                                    e.target.src = 'https://via.placeholder.com/600x400?text=Santa+Sofia';
                                 }}
                             />
                         </div>
@@ -80,9 +85,9 @@ const NewsPage = () => {
                                 )}
                             </div>
                             <p className="news-excerpt">
-                                {item.contenido.substring(0, 140)}...
+                                {stripHtml(item.contenido).substring(0, 150)}...
                             </p>
-                            <button className="read-more">Leer noticia completa</button>
+                            <span className="read-more">Leer noticia completa</span>
                         </div>
                     </Link>
                 ))}

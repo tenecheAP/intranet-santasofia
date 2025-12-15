@@ -76,15 +76,17 @@ const NewsDetail = () => {
 
                         {newsItem.imagen_url && (
                             <div className="article-image">
-                                <img src={newsItem.imagen_url} alt={newsItem.titulo} />
+                                <img
+                                    src={newsItem.imagen_url.startsWith('http') ? newsItem.imagen_url : `${process.env.REACT_APP_API_URL || ''}${newsItem.imagen_url}`}
+                                    alt={newsItem.titulo}
+                                />
                             </div>
                         )}
 
-                        <div className="article-body">
-                            {newsItem.contenido.split('\n').map((paragraph, index) => (
-                                paragraph.trim() !== '' && <p key={index}>{paragraph}</p>
-                            ))}
-                        </div>
+                        <div
+                            className="article-body article-content" // Added article-content class for styling
+                            dangerouslySetInnerHTML={{ __html: newsItem.contenido }}
+                        />
                     </article>
                 </main>
 
@@ -96,7 +98,11 @@ const NewsDetail = () => {
                             {sidebarNews.map(item => (
                                 <Link to={`/noticias/${item.id}`} key={item.id} className="sidebar-item">
                                     {item.imagen_url && (
-                                        <img src={item.imagen_url} alt={item.titulo} className="sidebar-thumb" />
+                                        <img
+                                            src={item.imagen_url.startsWith('http') ? item.imagen_url : `${process.env.REACT_APP_API_URL || ''}${item.imagen_url}`}
+                                            alt={item.titulo}
+                                            className="sidebar-thumb"
+                                        />
                                     )}
                                     <div className="sidebar-info">
                                         <h4>{item.titulo}</h4>

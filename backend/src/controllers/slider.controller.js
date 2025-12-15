@@ -32,7 +32,7 @@ const create = async (req, res) => {
     let imagen_url = '';
 
     if (req.file) {
-        imagen_url = `/uploads/${req.file.filename}`;
+        imagen_url = `/uploads/sliders/${req.file.filename}`;
     } else {
         console.error('No file received');
         return res.status(400).json({ error: 'La imagen es requerida' });
@@ -69,6 +69,8 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
     const { id } = req.params;
+    console.log('Update slider request body:', req.body);
+    console.log('Update slider request file:', req.file);
     const { titulo, link, es_interno, contenido, resumen, orden, activo } = req.body;
 
     try {
@@ -80,13 +82,26 @@ const update = async (req, res) => {
 
         let imagen_url = current.rows[0].imagen_url;
         if (req.file) {
-            imagen_url = `/uploads/${req.file.filename}`;
+            imagen_url = `/uploads/sliders/${req.file.filename}`;
         }
+
+        const values = [
+            titulo,
+            imagen_url,
+            link,
+            es_interno === 'true',
+            contenido,
+            resumen,
+            orden,
+            activo === 'true',
+            id
+        ];
+        console.log('Update query values:', values);
 
         const result = await pool.query(
             `UPDATE anuncios SET titulo = $1, imagen_url = $2, link = $3, es_interno = $4, contenido = $5, resumen = $6, orden = $7, activo = $8 
              WHERE id = $9 RETURNING *`,
-            [titulo, imagen_url, link, es_interno === 'true', contenido, resumen, orden, activo === 'true', id]
+            values
         );
         res.json(result.rows[0]);
     } catch (error) {

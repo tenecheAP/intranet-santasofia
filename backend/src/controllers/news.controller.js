@@ -27,7 +27,12 @@ const getNewsById = async (req, res) => {
 };
 
 const createNews = async (req, res) => {
-    const { titulo, contenido, imagen_url, fecha_publicacion, autor } = req.body;
+    const { titulo, contenido, fecha_publicacion, autor } = req.body;
+    let imagen_url = req.body.imagen_url || '';
+
+    if (req.file) {
+        imagen_url = `/uploads/news/${req.file.filename}`;
+    }
     try {
         const result = await pool.query(
             'INSERT INTO noticias (titulo, contenido, imagen_url, fecha_publicacion, autor) VALUES ($1, $2, $3, $4, $5) RETURNING *',
@@ -42,15 +47,27 @@ const createNews = async (req, res) => {
 
 const updateNews = async (req, res) => {
     const { id } = req.params;
-    const { titulo, contenido, imagen_url, fecha_publicacion, autor } = req.body;
+    const { titulo, contenido, fecha_publicacion, autor } = req.body;
+    let imagen_url = req.body.imagen_url;
+
+    if (req.file) {
+        imagen_url = `/uploads/news/${req.file.filename}`;
+    }
     try {
-        const result = await pool.query(
-            'UPDATE noticias SET titulo = $1, contenido = $2, imagen_url = $3, fecha_publicacion = $4, autor = $5 WHERE id = $6 RETURNING *',
-            [titulo, contenido, imagen_url, fecha_publicacion, autor, id]
-        );
-        if (result.rows.length === 0) {
+        const current = await pool.query('SELECT * FROM noticias WHERE id = $1', [id]);
+        if (current.rows.length === 0) {
             return res.status(404).json({ error: 'News not found' });
         }
+
+        let imagen_url = current.rows[0].imagen_url;
+        if (req.file) {
+            imagen_url = `/uploads/news/${req.file.filename}`;
+        }
+
+        const result = await pool.query(
+            'UPDATE noticias SET titulo = $1, contenido = $2, imagen_url = $3, fecha_publicacion = $4, autor = $5 WHERE id = $6 RETURNING *',
+            [titulo, contenido, imagen_url, fecha_publicacion || current.rows[0].fecha_publicacion, autor, id]
+        );
         res.json(result.rows[0]);
     } catch (error) {
         console.error('Error updating news:', error);

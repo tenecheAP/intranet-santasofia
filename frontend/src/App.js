@@ -65,7 +65,10 @@ function App() {
 
                 {/* Admin & Dynamic Content */}
                 <Route path="/admin/slider" element={<SliderAdmin />} />
+                <Route path="/admin/news" element={<NewsAdmin />} />
                 <Route path="/anuncio/:id" element={<AnuncioPage />} />
+                <Route path="/noticias" element={<NewsPage />} />
+                <Route path="/noticias/:id" element={<NewsDetail />} />
 
               </Routes>
             </main>

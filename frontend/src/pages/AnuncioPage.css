@@ -1,43 +1,69 @@
-.anuncio-page {
-    max-width: 1000px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+.anuncio-detail-page {
+    /* Uses home-page grid layout */
+}
+
+.anuncio-full-view {
     background: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    min-height: 80vh;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding-bottom: 2rem;
 }
 
 .anuncio-header {
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-.anuncio-image {
-    width: 100%;
-    max-height: 500px;
-    object-fit: cover;
-    border-radius: 8px 8px 0 0;
-    margin-bottom: 1.5rem;
+    padding: 2rem 2rem 1rem 2rem;
+    text-align: left;
 }
 
 .anuncio-header h1 {
-    font-size: 2.5rem;
-    color: #333;
-    padding: 0 1rem;
+    font-size: 2.2rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    padding: 0;
 }
 
-.anuncio-content {
+.anuncio-date {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.anuncio-image-container {
+    width: 100%;
+    max-height: 500px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.anuncio-featured-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.anuncio-body {
+    padding: 1rem 2rem;
     font-size: 1.1rem;
-    line-height: 1.6;
-    color: #444;
-    padding: 2rem;
+    line-height: 1.8;
+    color: #34495e;
+}
+
+.anuncio-body p {
+    margin-bottom: 1.5rem;
+}
+
+.anuncio-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 1rem 0;
 }
 
 .anuncio-footer {
     padding: 2rem;
     text-align: center;
     border-top: 1px solid #eee;
+    margin-top: 2rem;
 }
 
 .back-button {
@@ -48,14 +74,57 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 1rem;
+    transition: background 0.3s;
 }
 
 .back-button:hover {
     background-color: #0d3b82;
 }
 
-.loading, .error-container {
+.loading,
+.error-container {
     text-align: center;
     padding: 4rem;
-    font-size: 1.2rem;
+}
+
+/* Template Styles for WYSIWYG Content */
+.article-content h2,
+.article-content h3 {
+    color: #2c3e50;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.article-content .lead {
+    font-size: 1.25rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+}
+
+.article-content .feature-list {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.article-content .feature-list li {
+    margin-bottom: 0.5rem;
+    color: #444;
+}
+
+.article-content .info-box {
+    background-color: #f8f9fa;
+    border-left: 4px solid var(--primary-color, #012d6a);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+    color: #2c3e50;
+}
+
+.article-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 1.5rem 0;
 }

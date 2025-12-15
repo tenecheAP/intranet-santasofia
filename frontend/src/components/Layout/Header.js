@@ -5,6 +5,7 @@ import LoginModal from '../Auth/LoginModal';
 import { Mail, Headphones, Phone, LayoutGrid, FileWarning } from 'lucide-react';
 import './Header.css';
 import logo from '../../assets/icons/logo-con-letras-fondo-blanco.png';
+import almeraLogo from '../../assets/icons/almera.png';
 
 function Header() {
   const [showSearch, setShowSearch] = useState(false);
@@ -65,6 +66,16 @@ function Header() {
             <Headphones size={20} />
           </Link>
 
+          <a
+            href="https://sgi.almeraim.com/sgi/index.php?conid=sgihss&amp;" /* URL supuesta, favor verificar */
+            target="_blank"
+            rel="noopener noreferrer"
+            className="action-icon-btn almera-action"
+            title="Almera Information Management"
+          >
+            <img src={almeraLogo} alt="Almera" />
+          </a>
+
           {user ? (
             <div className="user-menu-container" onMouseLeave={() => setShowUserMenu(false)}>
               <button className="user-action logged-in" onClick={() => setShowUserMenu(!showUserMenu)}>
@@ -73,6 +84,7 @@ function Header() {
               {showUserMenu && (
                 <div className="user-dropdown">
                   <Link to="/admin/slider" className="dropdown-item">Gestionar Slider</Link>
+                  <Link to="/admin/news" className="dropdown-item">Gestionar Noticias</Link>
                   <button onClick={logout}>Cerrar Sesión</button>
                 </div>
               )}

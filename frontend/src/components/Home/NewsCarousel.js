@@ -52,6 +52,16 @@ function NewsCarousel() {
         }
     };
 
+    const nextSlide = (e) => {
+        e && e.stopPropagation();
+        setCurrentIndex((prev) => (prev + 1) % slides.length);
+    };
+
+    const prevSlide = (e) => {
+        e && e.stopPropagation();
+        setCurrentIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    };
+
     if (slides.length === 0) return null;
 
     return (
@@ -65,7 +75,9 @@ function NewsCarousel() {
                         style={{ cursor: 'pointer' }}
                     >
                         <img
-                            src={slide.imagen_url.startsWith('http') ? slide.imagen_url : slide.imagen_url}
+                            src={slide.imagen_url.startsWith('http')
+                                ? slide.imagen_url
+                                : `${process.env.REACT_APP_API_URL || ''}${slide.imagen_url}`}
                             alt={slide.titulo}
                             className="carousel-image"
                         />
@@ -77,18 +89,22 @@ function NewsCarousel() {
                 ))}
             </div>
             {slides.length > 1 && (
-                <div className="carousel-indicators">
-                    {slides.map((_, index) => (
-                        <button
-                            key={index}
-                            className={`indicator ${currentIndex === index ? 'active' : ''}`}
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                goToSlide(index);
-                            }}
-                        ></button>
-                    ))}
-                </div>
+                <>
+                    <button className="carousel-control prev" onClick={prevSlide}>&#10094;</button>
+                    <button className="carousel-control next" onClick={nextSlide}>&#10095;</button>
+                    <div className="carousel-indicators">
+                        {slides.map((_, index) => (
+                            <button
+                                key={index}
+                                className={`indicator ${currentIndex === index ? 'active' : ''}`}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    goToSlide(index);
+                                }}
+                            ></button>
+                        ))}
+                    </div>
+                </>
             )}
         </div>
     );

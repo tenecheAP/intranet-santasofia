@@ -11,7 +11,12 @@ const getAll = async (req, res) => {
 };
 
 const create = async (req, res) => {
-    const { titulo, categoria, tipo, fecha, url } = req.body;
+    const { titulo, categoria, tipo, fecha } = req.body;
+    let url = req.body.url || '';
+
+    if (req.file) {
+        url = `/uploads/documents/${req.file.filename}`;
+    }
     try {
         const result = await pool.query(
             'INSERT INTO documentos (titulo, categoria, tipo, fecha, url) VALUES ($1, $2, $3, $4, $5) RETURNING *',
@@ -26,7 +31,12 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
     const { id } = req.params;
-    const { titulo, categoria, tipo, fecha, url } = req.body;
+    const { titulo, categoria, tipo, fecha } = req.body;
+    let url = req.body.url;
+
+    if (req.file) {
+        url = `/uploads/documents/${req.file.filename}`;
+    }
     try {
         const result = await pool.query(
             'UPDATE documentos SET titulo = $1, categoria = $2, tipo = $3, fecha = $4, url = $5 WHERE id = $6 RETURNING *',

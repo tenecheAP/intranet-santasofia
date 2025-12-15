@@ -4,14 +4,26 @@ const sliderController = require('../controllers/slider.controller');
 const multer = require('multer');
 const path = require('path');
 
+const fs = require('fs');
+
+// Ensure uploads directory exists
+const uploadDir = 'uploads/sliders/';
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
 // Configure Multer
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/');
+        cb(null, uploadDir);
     },
     filename: function (req, file, cb) {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, uniqueSuffix + path.extname(file.originalname));
+        // If file already exists, keep the original name to avoid duplicates
+        if (fs.existsSync(path.join(uploadDir, file.originalname))) {
+            cb(null, file.originalname);
+        } else {
+            cb(null, Date.now() + path.extname(file.originalname));
+        }
     }
 });
 

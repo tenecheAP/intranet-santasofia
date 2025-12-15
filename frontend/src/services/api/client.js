@@ -2,15 +2,19 @@
 const baseUrl = process.env.REACT_APP_API_URL || '';
 
 const request = async (method, path, body = null) => {
+  const isFormData = body instanceof FormData;
+
   const options = {
     method,
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: {}, // Do not default Content-Type globally yet
   };
 
+  if (!isFormData) {
+    options.headers['Content-Type'] = 'application/json';
+  }
+
   if (body) {
-    options.body = JSON.stringify(body);
+    options.body = isFormData ? body : JSON.stringify(body);
   }
 
   // Construir la URL completa: baseUrl + path
