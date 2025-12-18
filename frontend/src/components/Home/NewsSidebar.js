@@ -43,10 +43,26 @@ function NewsSidebar() {
             <div className="quick-links">
                 <h4>Enlaces de Interés</h4>
                 <ul>
-                    <li><a href="#">Hoy en la U</a></li>
-                    <li><a href="#">Al día</a></li>
-                    <li><a href="#">Fotos</a></li>
-                    <li><a href="#">Participe</a></li>
+                    <li>
+                        <a href="https://mail.google.com/mail/" target="_blank" rel="noopener noreferrer">
+                            Correo Institucional
+                        </a>
+                    </li>
+                    <li>
+                        <Link to="/sistemas">
+                            Sistemas (Software Propio)
+                        </Link>
+                    </li>
+                    <li>
+                        <a href="https://www.santasofia.gov.co/" target="_blank" rel="noopener noreferrer">
+                            Portal Web Santa Sofía
+                        </a>
+                    </li>
+                    <li>
+                        <Link to="/documental">
+                            Gestión Documental
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </aside>

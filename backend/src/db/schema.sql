@@ -51,3 +51,15 @@ CREATE TABLE IF NOT EXISTS noticias (
     autor VARCHAR(100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Crear tabla de sistemas y aplicativos
+CREATE TABLE IF NOT EXISTS sistemas (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(200) NOT NULL,
+    descripcion TEXT,
+    url VARCHAR(500) NOT NULL,
+    interno BOOLEAN DEFAULT FALSE,
+    orden INTEGER DEFAULT 0,
+    activo BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

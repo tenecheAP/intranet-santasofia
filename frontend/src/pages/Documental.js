@@ -21,6 +21,7 @@ function Documental() {
         fecha: new Date().toISOString().split('T')[0],
         url: ''
     });
+    const [selectedFile, setSelectedFile] = useState(null);
 
     useEffect(() => {
         loadDocuments();
@@ -59,12 +60,10 @@ function Documental() {
     const handleFileSelect = (e) => {
         const file = e.target.files[0];
         if (file) {
-            const folder = getFolderByCategory(newDoc.categoria);
-            const path = `/documentos/${folder}/${file.name}`;
-
+            setSelectedFile(file);
+            // Ya no simulamos la URL falsa aquí. Dejamos que el backend la genere.
             setNewDoc({
                 ...newDoc,
-                url: path,
                 titulo: newDoc.titulo || file.name.split('.')[0]
             });
         }
@@ -73,11 +72,25 @@ function Documental() {
     const handleAddDocument = async (e) => {
         e.preventDefault();
         try {
+            const formData = new FormData();
+            formData.append('titulo', newDoc.titulo);
+            formData.append('categoria', newDoc.categoria);
+            formData.append('tipo', newDoc.tipo);
+            formData.append('fecha', newDoc.fecha);
+
+            // Si el usuario seleccionó un archivo, lo enviamos
+            if (selectedFile) {
+                formData.append('archivo', selectedFile);
+            } else if (newDoc.url) {
+                // Si es edición y no cambiaron el archivo, mantenemos la URL existente (o si pegan una externa)
+                formData.append('url', newDoc.url);
+            }
+
             if (editingDoc) {
-                await documentsService.updateDocument(editingDoc.id, newDoc);
+                await documentsService.updateDocument(editingDoc.id, formData);
                 alert('Documento actualizado correctamente.');
             } else {
-                await documentsService.createDocument(newDoc);
+                await documentsService.createDocument(formData);
                 alert('Documento agregado correctamente.');
             }
             loadDocuments();
@@ -97,6 +110,7 @@ function Documental() {
             fecha: doc.fecha,
             url: doc.url || ''
         });
+        setSelectedFile(null); // Resetear archivo seleccionado al editar
         setIsUploadModalOpen(true);
     };
 
@@ -149,8 +163,19 @@ function Documental() {
 
     const handleDownload = (doc) => {
         if (doc.url) {
-            const encodedUrl = encodeURI(doc.url);
-            window.open(encodedUrl, '_blank');
+            let downloadUrl = doc.url;
+            // Si la URL es relativa y empieza por /uploads (generada por nuestro backend),
+            // le añadimos el dominio de la API si estamos en desarrollo para que funcione el link directo.
+            // Aunque el proxy debería manejarlo, a veces window.open ignora el proxy local.
+            if (doc.url.startsWith('/uploads')) {
+                const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+                downloadUrl = `${API_URL}${doc.url}`;
+            } else if (doc.url.startsWith('/documentos/')) {
+                // Manejo de legados: si empieza por /documentos/ (carpeta public), usar el dominio del frontend
+                // No hacemos nada, es relativo al frontend
+            }
+
+            window.open(downloadUrl, '_blank');
         } else {
             alert('Este documento no tiene un enlace configurado.');
         }

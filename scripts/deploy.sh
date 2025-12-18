@@ -7,6 +7,11 @@
 echo "🚀 Iniciando despliegue del Sistema de Intranet..."
 echo ""
 
+# Asegurar que estamos en la raíz del proyecto
+cd "$(dirname "$0")/.."
+echo "📂 Directorio de trabajo: $(pwd)"
+
+
 # Verificar que Docker esté instalado
 if ! command -v docker &> /dev/null; then
     echo "❌ Error: Docker no está instalado"

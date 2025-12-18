@@ -160,7 +160,7 @@ const NewsAdmin = () => {
                 </div>
 
                 <div className="form-group">
-                    <label>Imagen:</label>
+                    <label>Imagen (Recomendado: 1200x600 px):</label>
                     <input
                         type="file"
                         accept="image/*"

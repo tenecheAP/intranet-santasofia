@@ -25,6 +25,8 @@ import AnuncioPage from './pages/AnuncioPage';
 import NewsPage from './pages/NewsPage';
 import NewsAdmin from './pages/NewsAdmin';
 import NewsDetail from './pages/NewsDetail';
+import IndicatorsPage from './pages/IndicatorsPage';
+import SistemasAdmin from './pages/SistemasAdmin';
 import './App.css';
 
 function App() {
@@ -59,6 +61,7 @@ function App() {
                 <Route path="/administrativo/financiera" element={<Financiera />} />
 
                 {/* Otros */}
+                <Route path="/indicadores" element={<IndicatorsPage />} />
                 <Route path="/sistemas" element={<Sistemas />} />
                 <Route path="/mesa-de-ayuda" element={<HelpDesk />} />
                 <Route path="/documental" element={<Documental />} />
@@ -66,6 +69,7 @@ function App() {
                 {/* Admin & Dynamic Content */}
                 <Route path="/admin/slider" element={<SliderAdmin />} />
                 <Route path="/admin/news" element={<NewsAdmin />} />
+                <Route path="/admin/sistemas" element={<SistemasAdmin />} />
                 <Route path="/anuncio/:id" element={<AnuncioPage />} />
                 <Route path="/noticias" element={<NewsPage />} />
                 <Route path="/noticias/:id" element={<NewsDetail />} />

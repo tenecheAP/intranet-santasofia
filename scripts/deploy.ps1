@@ -6,6 +6,12 @@
 Write-Host "🚀 Iniciando despliegue del Sistema de Intranet..." -ForegroundColor Cyan
 Write-Host ""
 
+# Asegurar que estamos en la raíz del proyecto
+$ScriptRoot = Split-Path $MyInvocation.MyCommand.Path
+Set-Location "$ScriptRoot\.."
+Write-Host "📂 Directorio de trabajo: $(Get-Location)" -ForegroundColor Gray
+
+
 # Verificar que Docker esté instalado
 try {
     $dockerVersion = docker --version

@@ -178,7 +178,7 @@ function SliderAdmin() {
                 </div>
 
                 <div className="form-group">
-                    <label>Imagen (1920x600 recomendado):</label>
+                    <label>Imagen (Recomendado: 1920x600 px):</label>
                     <input type="file" accept="image/*" onChange={handleFileChange} required={!editingId} />
                 </div>
 

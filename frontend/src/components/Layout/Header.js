@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import LoginModal from '../Auth/LoginModal';
-import { Mail, Headphones, Phone, LayoutGrid, FileWarning } from 'lucide-react';
+import { Mail, Headphones, Phone, Monitor, FileText } from 'lucide-react';
 import './Header.css';
 import logo from '../../assets/icons/logo-con-letras-fondo-blanco.png';
 import almeraLogo from '../../assets/icons/almera.png';
@@ -27,9 +27,9 @@ function Header() {
           <Link
             to="/documental"
             className="action-icon-btn contingency-action"
-            title="Formatos de Contingencia"
+            title="Gestión Documental"
           >
-            <FileWarning size={20} />
+            <FileText size={20} />
           </Link>
 
           <Link
@@ -45,7 +45,7 @@ function Header() {
             className="action-icon-btn apps-action"
             title="Sistemas y Aplicativos"
           >
-            <LayoutGrid size={20} />
+            <Monitor size={20} />
           </Link>
 
           <a
@@ -71,7 +71,7 @@ function Header() {
             target="_blank"
             rel="noopener noreferrer"
             className="action-icon-btn almera-action"
-            title="Almera Information Management"
+            title="Almera"
           >
             <img src={almeraLogo} alt="Almera" />
           </a>
@@ -85,6 +85,7 @@ function Header() {
                 <div className="user-dropdown">
                   <Link to="/admin/slider" className="dropdown-item">Gestionar Slider</Link>
                   <Link to="/admin/news" className="dropdown-item">Gestionar Noticias</Link>
+                  <Link to="/admin/sistemas" className="dropdown-item">Gestionar Sistemas</Link>
                   <button onClick={logout}>Cerrar Sesión</button>
                 </div>
               )}
@@ -141,6 +142,12 @@ function Header() {
               <li><NavLink to="/administrativo/juridica">Jurídica y Contratación</NavLink></li>
               <li><NavLink to="/administrativo/financiera">Gestión Financiera</NavLink></li>
             </ul>
+          </li>
+
+          <li>
+            <NavLink to="/indicadores" className={({ isActive }) => isActive ? 'active' : ''}>
+              Indicadores
+            </NavLink>
           </li>
 
           <li>

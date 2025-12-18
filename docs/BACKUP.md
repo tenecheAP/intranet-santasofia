@@ -50,22 +50,22 @@ tar -czf "backups/intranet-backup-$DATE.tar.gz" \
 echo "✅ Backup creado: backups/intranet-backup-$DATE.tar.gz"
 ```
 
-### Opción 2: Backup de Base de Datos
+**En Windows PowerShell (IMPORTANTE: Configurar UTF-8 primero):**
+```powershell
+# Configurar la consola para usar UTF-8 (Vital para evitar caracteres extraños ├│ ñ)
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
-Para hacer backup solo de los datos de PostgreSQL:
-
-```bash
-# Backup de la base de datos
-docker exec intranet-db-1 pg_dump -U user_intranet intranet_db > backup-db-$(date +%Y-%m-%d).sql
-
-# O con compresión
-docker exec intranet-db-1 pg_dump -U user_intranet intranet_db | gzip > backup-db-$(date +%Y-%m-%d).sql.gz
+$date = Get-Date -Format "yyyy-MM-dd_HHmm"
+# Usar 'docker compose exec -T' para evitar problemas de TTY en la redirección
+docker compose exec -T db pg_dump -U user_intranet intranet_db > "backup-db-$date.sql"
 ```
 
-**En Windows PowerShell:**
-```powershell
-$date = Get-Date -Format "yyyy-MM-dd_HHmm"
-docker exec intranet-db-1 pg_dump -U user_intranet intranet_db > "backup-db-$date.sql"
+### Opción 2: Backup de Base de Datos (Universal)
+Para asegurar la codificación correcta en cualquier sistema:
+
+```bash
+# Backup comprimido (Recomendado)
+docker compose exec -T db pg_dump -U user_intranet intranet_db | gzip > backup-db-$(date +%Y-%m-%d).sql.gz
 ```
 
 ### Opción 3: Backup del Volumen Docker
