@@ -48,6 +48,25 @@
   line-height: 1.2;
 }
 
+.brand-support-info {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 0.2rem;
+  padding: 2px 8px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  width: fit-content;
+  border-left: 3px solid #fbbc04;
+  /* Support yellow accent */
+}
+
+.brand-support-info strong {
+  color: var(--color-primary);
+}
+
 .header-actions {
   display: flex;
   align-items: center;
@@ -132,6 +151,14 @@
 .almera-action:hover {
   border-color: #d32f2f;
   box-shadow: 0 5px 15px rgba(211, 47, 47, 0.2);
+}
+
+.support-action {
+  background: linear-gradient(135deg, #ff9800, #f57c00);
+}
+
+.support-action:hover {
+  background: linear-gradient(135deg, #ffa726, #fb8c00);
 }
 
 .user-action:hover {
@@ -234,7 +261,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   background: none;
   border: none;
   padding: 0.5rem 1rem;

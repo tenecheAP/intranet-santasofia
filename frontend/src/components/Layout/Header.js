@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import LoginModal from '../Auth/LoginModal';
-import { Mail, Headphones, Phone, Monitor, FileText } from 'lucide-react';
+import { Mail, Headphones, Phone, Monitor, FileText, LifeBuoy } from 'lucide-react';
 import './Header.css';
 import logo from '../../assets/icons/logo-con-letras-fondo-blanco.png';
 import almeraLogo from '../../assets/icons/almera.png';
@@ -21,6 +21,9 @@ function Header() {
           <div className="brand-text">
             <span>E.S.E Hospital Departamental</span>
             <h1>Universitario Santa Sofía de Caldas</h1>
+            <div className="brand-support-info">
+              <Headphones size={12} /> Soporte Sistemas (Fuera de oficina): <strong>3206208568</strong>
+            </div>
           </div>
         </div>
         <div className="header-actions">
@@ -74,6 +77,16 @@ function Header() {
             title="Almera"
           >
             <img src={almeraLogo} alt="Almera" />
+          </a>
+
+          <a
+            href="https://forms.gle/841p3Dwbh2xUZgxG8"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="action-icon-btn support-action"
+            title="Soporte Sistemas / Reportar Error"
+          >
+            <LifeBuoy size={20} />
           </a>
 
           {user ? (

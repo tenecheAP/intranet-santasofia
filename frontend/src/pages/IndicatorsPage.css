@@ -119,7 +119,37 @@
 .indicators-controls {
     margin-bottom: 2rem;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.btn-network-dashboard {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #0056b3, #003d80);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 86, 179, 0.2);
+    border-left: 5px solid #fbbc04;
+}
+
+.btn-network-dashboard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 86, 179, 0.3);
+    background: linear-gradient(135deg, #0069d9, #0056b3);
+}
+
+.btn-network-dashboard i {
+    font-size: 1.2rem;
+    color: #fbbc04;
 }
 
 .search-box {
@@ -307,5 +337,111 @@
 
     .btn-open span {
         display: none;
+    }
+}
+/* --- Integrated Dashboard 2025 Styles --- */
+.dashboard-content-integrated {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-top: 1rem;
+}
+
+.dashboard-section-integ {
+    animation: dashboardFadeIn 0.3s ease-out;
+}
+
+.section-title-integ {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #edf2f7;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.indicator-grid-integ {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem;
+}
+
+.indicator-card-integ {
+    background: white;
+    border-radius: 12px;
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: #2d3748;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.indicator-card-integ:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-secondary);
+}
+
+.card-icon-wrapper-integ {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.indicator-card-integ.folder .card-icon-wrapper-integ {
+    background-color: #ebf8ff;
+    color: #3182ce;
+}
+
+.indicator-card-integ.excel .card-icon-wrapper-integ {
+    background-color: #f0fff4;
+    color: #38a169;
+}
+
+.card-info-integ {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    gap: 0.2rem;
+}
+
+.card-name-integ {
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-action-integ {
+    font-size: 0.75rem;
+    color: #a0aec0;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.indicator-card-integ:hover .card-action-integ {
+    color: var(--color-secondary);
+}
+
+@keyframes dashboardFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .indicator-grid-integ {
+        grid-template-columns: 1fr;
     }
 }
