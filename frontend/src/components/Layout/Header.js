@@ -6,12 +6,42 @@ import { Mail, Headphones, Phone, Monitor, FileText, LifeBuoy } from 'lucide-rea
 import './Header.css';
 import logo from '../../assets/icons/logo-con-letras-fondo-blanco.png';
 import almeraLogo from '../../assets/icons/almera.png';
+import * as dbService from '../../services/api/db.service';
 
 function Header() {
   const [showSearch, setShowSearch] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const { user, logout } = useAuth();
   const [showUserMenu, setShowUserMenu] = useState(false);
+
+  const handleExportDB = async () => {
+    try {
+      await dbService.downloadBackup();
+    } catch (error) {
+      alert('Error al exportar la base de datos');
+    }
+  };
+
+  const handleImportDB = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (!window.confirm('¿Estás seguro de restaurar la base de datos? Esto sobrescribirá los datos actuales.')) {
+      e.target.value = '';
+      return;
+    }
+
+    try {
+      await dbService.restoreBackup(file);
+      alert('Base de datos restaurada correctamente. La página se recargará.');
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+      alert('Error al restaurar la base de datos: ' + error.message);
+    } finally {
+      e.target.value = '';
+    }
+  };
 
   return (
     <div className="header-wrapper">
@@ -99,6 +129,13 @@ function Header() {
                   <Link to="/admin/slider" className="dropdown-item">Gestionar Slider</Link>
                   <Link to="/admin/news" className="dropdown-item">Gestionar Noticias</Link>
                   <Link to="/admin/sistemas" className="dropdown-item">Gestionar Sistemas</Link>
+                  <hr />
+                  <button onClick={handleExportDB} className="dropdown-item">Exportar Base de Datos</button>
+                  <label className="dropdown-item" style={{ cursor: 'pointer' }}>
+                    Restaurar Base de Datos
+                    <input type="file" accept=".sql" onChange={handleImportDB} style={{ display: 'none' }} />
+                  </label>
+                  <hr />
                   <button onClick={logout}>Cerrar Sesión</button>
                 </div>
               )}

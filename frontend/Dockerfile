@@ -3,6 +3,10 @@ FROM node:18-alpine as builder
 
 WORKDIR /app
 
+# Argumento para la URL de la API (pasado desde docker-compose o comando build)
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+
 # Copia los archivos de configuración y dependencias
 COPY package.json ./
 RUN npm install

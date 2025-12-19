@@ -393,3 +393,94 @@
     color: white;
     transform: scale(1.05);
 }
+
+/* Sidebar Categories Enhancement */
+.side-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-border);
+}
+
+.side-header h3 {
+    margin-bottom: 0 !important;
+    border-bottom: none !important;
+    color: var(--color-primary);
+}
+
+.add-cat-btn {
+    background: var(--color-secondary);
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+.add-cat-btn:hover {
+    background: var(--color-accent);
+    transform: scale(1.1);
+}
+
+.category-item-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    border-radius: 4px;
+    margin-bottom: 2px;
+}
+
+.category-item-container:hover {
+    background-color: var(--color-background-light);
+}
+
+.category-item-container button {
+    flex: 1;
+    text-align: left;
+}
+
+.cat-actions {
+    display: none;
+    gap: 4px;
+    padding-right: 8px;
+}
+
+.category-item-container:hover .cat-actions {
+    display: flex;
+    align-items: center;
+}
+
+.cat-actions button {
+    background: transparent !important;
+    border: none !important;
+    color: #adb5bd !important;
+    cursor: pointer;
+    padding: 4px !important;
+    font-size: 0.8rem !important;
+    transition: all 0.2s;
+    width: auto !important;
+}
+
+.cat-actions button:hover {
+    color: var(--color-secondary) !important;
+    transform: scale(1.2);
+}
+
+.cat-actions button[title="Eliminar"]:hover {
+    color: #dc3545 !important;
+}
+
+@media (max-width: 768px) {
+    .cat-actions {
+        display: flex;
+    }
+}

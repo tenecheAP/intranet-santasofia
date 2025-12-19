@@ -9,9 +9,9 @@ services:
     image: postgres:15-alpine
     restart: always
     environment:
-      POSTGRES_USER: user_intranet
-      POSTGRES_PASSWORD: strong_password
-      POSTGRES_DB: intranet_db
+      POSTGRES_USER: ${POSTGRES_USER:-user_intranet}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-strong_password}
+      POSTGRES_DB: ${POSTGRES_DB:-intranet_db}
     ports:
       # Puerto para acceder a la DB desde tu máquina local (opcional, pero útil)
       - "5432:5432"
@@ -41,12 +41,12 @@ services:
       - "3001:3001"
     environment:
       # La API se conecta a la DB usando el nombre del servicio 'db'
-      NODE_ENV: development
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USER: user_intranet
-      DB_PASSWORD: strong_password
-      DB_NAME: intranet_db
+      NODE_ENV: ${NODE_ENV:-development}
+      DB_HOST: ${DB_HOST:-db}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_USER: ${DB_USER:-user_intranet}
+      DB_PASSWORD: ${DB_PASSWORD:-strong_password}
+      DB_NAME: ${DB_NAME:-intranet_db}
     depends_on:
       # Espera a que la base de datos esté "saludable" antes de iniciar
       db:
@@ -76,7 +76,7 @@ services:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
       # URL de la API usando la IP de tu red para que otros equipos puedan acceder
-      - REACT_APP_API_URL=http://192.168.43.222:3001
+      - REACT_APP_API_URL=http://${SERVER_IP:-192.168.43.222}:3001
     depends_on:
       - api
 

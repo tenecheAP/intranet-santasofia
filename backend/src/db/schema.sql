@@ -63,3 +63,9 @@ CREATE TABLE IF NOT EXISTS sistemas (
     activo BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+-- Crear tabla de categorias de documentos
+CREATE TABLE IF NOT EXISTS categorias_documentos (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

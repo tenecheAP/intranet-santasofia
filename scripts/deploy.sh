@@ -79,13 +79,16 @@ else
     echo "⚠️  Frontend no responde. Verifica los logs con: docker compose logs frontend"
 fi
 
+# Determinar la IP/Host para mostrar al final
+DISPLAY_IP=${SERVER_IP:-localhost}
+
 echo ""
 echo "✅ ¡Despliegue completado!"
 echo ""
 echo "📌 Accede a la aplicación:"
-echo "   - Frontend: http://localhost"
-echo "   - API: http://localhost:3001"
-echo "   - Health Check: http://localhost:3001/health"
+echo "   - Frontend: http://${DISPLAY_IP}"
+echo "   - API: http://${DISPLAY_IP}:3001"
+echo "   - Health Check: http://${DISPLAY_IP}:3001/health"
 echo ""
 echo "📝 Comandos útiles:"
 echo "   - Ver logs: docker compose logs -f"

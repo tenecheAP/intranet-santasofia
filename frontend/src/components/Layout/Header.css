@@ -304,6 +304,12 @@
   border: 1px solid #eee;
 }
 
+.user-dropdown hr {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 4px 0;
+}
+
 .user-dropdown .dropdown-item,
 .user-dropdown button {
   width: 100%;

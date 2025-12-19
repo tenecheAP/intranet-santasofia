@@ -88,13 +88,27 @@ try {
     Write-Host "⚠️  Frontend no responde. Verifica los logs con: docker compose logs frontend" -ForegroundColor Yellow
 }
 
+# Intentar leer SERVER_IP del archivo .env si no está en las variables de entorno
+$DisplayIP = "localhost"
+if ($env:SERVER_IP) {
+    $DisplayIP = $env:SERVER_IP
+} elseif (Test-Path ".env") {
+    $envFile = Get-Content ".env"
+    foreach ($line in $envFile) {
+        if ($line -match "^SERVER_IP=(.*)") {
+            $DisplayIP = $matches[1].Trim()
+            break
+        }
+    }
+}
+
 Write-Host ""
 Write-Host "✅ ¡Despliegue completado!" -ForegroundColor Green
 Write-Host ""
 Write-Host "📌 Accede a la aplicación:" -ForegroundColor Cyan
-Write-Host "   - Frontend: http://localhost" -ForegroundColor White
-Write-Host "   - API: http://localhost:3001" -ForegroundColor White
-Write-Host "   - Health Check: http://localhost:3001/health" -ForegroundColor White
+Write-Host "   - Frontend: http://$DisplayIP" -ForegroundColor White
+Write-Host "   - API: http://$DisplayIP:3001" -ForegroundColor White
+Write-Host "   - Health Check: http://$DisplayIP:3001/health" -ForegroundColor White
 Write-Host ""
 Write-Host "📝 Comandos útiles:" -ForegroundColor Cyan
 Write-Host "   - Ver logs: docker compose logs -f" -ForegroundColor White

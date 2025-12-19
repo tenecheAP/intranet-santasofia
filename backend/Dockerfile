@@ -2,7 +2,10 @@ FROM node:18-slim
 
 WORKDIR /app
 
-# Copia e instala dependencias
+# Instala dependencias del sistema necesarias (postgresql-client para backups)
+RUN apt-get update && apt-get install -y postgresql-client && rm -rf /var/lib/apt/lists/*
+
+# Copia e instala dependencias de Node.js
 COPY package.json ./
 RUN npm install --omit=dev
 

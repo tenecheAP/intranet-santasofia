@@ -184,3 +184,10 @@ INSERT INTO directorio (departamento, extension) VALUES
 -- Insertar anuncios de ejemplo
 INSERT INTO anuncios (titulo, imagen_url, link, es_interno, contenido, resumen, orden, activo) VALUES
 ('Bienvenido a la Intranet', 'https://via.placeholder.com/1920x600', '#', true, '<p>Bienvenido al nuevo portal de la Clínica Santa Sofía.</p>', 'Nuevo portal de servicios para colaboradores.', 1, true);
+-- Insertar categorías iniciales
+INSERT INTO categorias_documentos (nombre) VALUES
+('Gestión de Calidad'),
+('Talento Humano'),
+('Jurídica'),
+('Contratación')
+ON CONFLICT (nombre) DO NOTHING;
