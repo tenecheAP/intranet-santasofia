@@ -1,15 +1,17 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = function (app) {
-  // Usar variable de entorno si está disponible, sino usar localhost (para desarrollo local)
-  const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+  // IMPORTANTE: Dentro de Docker, el backend siempre es 'http://api:3001'
+  const apiUrl = 'http://api:3001';
 
   app.use(
-    ['/news', '/slider', '/directory', '/health', '/uploads', '/documents', '/categories', '/sistemas'],
+    ['/news', '/health', '/uploads', '/documents', '/sliders'],
     createProxyMiddleware({
       target: apiUrl,
       changeOrigin: true,
-      logLevel: 'debug'
+      logLevel: 'debug',
+      secure: false, // Permitir conexiones HTTP/HTTPS autogestionadas
+      xfwd: true     // Pasar las cabeceras de proxy de Docker
     })
   );
 };

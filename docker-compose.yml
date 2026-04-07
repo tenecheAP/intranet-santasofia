@@ -39,6 +39,8 @@ services:
     ports:
       # Puerto de la API para acceder desde tu máquina local
       - "3001:3001"
+    env_file:
+      - .env
     environment:
       # La API se conecta a la DB usando el nombre del servicio 'db'
       NODE_ENV: ${NODE_ENV:-development}

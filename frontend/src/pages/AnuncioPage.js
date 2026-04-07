@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import NewsSidebar from '../components/Home/NewsSidebar';
+import { slidersData } from '../data/slidersData';
 import './AnuncioPage.css';
 import './Home.css'; // Reuse Home grid styles
 
@@ -9,37 +10,24 @@ function AnuncioPage() {
     const navigate = useNavigate();
     const [anuncio, setAnuncio] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchAnuncio = async () => {
-            try {
-                const baseUrl = process.env.REACT_APP_API_URL || '';
-                const response = await fetch(`${baseUrl}/slider/${id}`);
-                if (!response.ok) {
-                    throw new Error('Anuncio no encontrado');
-                }
-                const data = await response.json();
-                setAnuncio(data);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchAnuncio();
+        // Encontrar el anuncio en nuestros datos locales
+        const item = slidersData.find(s => s.id === parseInt(id));
+        if (item) {
+            setAnuncio(item);
+        }
+        setLoading(false);
     }, [id]);
 
     if (loading) return <div className="loading">Cargando anuncio...</div>;
-    if (error) return (
+    if (!anuncio) return (
         <div className="error-container">
             <h2>Error</h2>
-            <p>{error}</p>
+            <p>Anuncio no encontrado</p>
             <button onClick={() => navigate('/')} className="btn-primary">Volver al Inicio</button>
         </div>
     );
-    if (!anuncio) return null;
 
     return (
         <div className="home-page anuncio-detail-page">
@@ -48,19 +36,25 @@ function AnuncioPage() {
                     <article className="anuncio-full-view">
                         <div className="anuncio-header">
                             <h1>{anuncio.titulo}</h1>
-                            <p className="anuncio-date">Publicado: {new Date(anuncio.created_at).toLocaleDateString()}</p>
+                            <p className="anuncio-date">Publicado: {new Date().toLocaleDateString()}</p>
                         </div>
 
                         <div className="anuncio-image-container">
                             <img
-                                src={anuncio.imagen_url.startsWith('http') ? anuncio.imagen_url : `${process.env.REACT_APP_API_URL || ''}${anuncio.imagen_url}`}
+                                src={anuncio.imagen_url.startsWith('http') || anuncio.imagen_url.startsWith('/') 
+                                    ? anuncio.imagen_url 
+                                    : `${process.env.REACT_APP_API_URL || ''}${anuncio.imagen_url}`}
                                 alt={anuncio.titulo}
                                 className="anuncio-featured-image"
                             />
                         </div>
 
                         <div className="anuncio-body">
-                            <div dangerouslySetInnerHTML={{ __html: anuncio.contenido }} />
+                            {anuncio.contenido ? (
+                                <div dangerouslySetInnerHTML={{ __html: anuncio.contenido }} />
+                            ) : (
+                                <p>{anuncio.resumen}</p>
+                            )}
                         </div>
 
                         <div className="anuncio-footer">

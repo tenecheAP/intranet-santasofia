@@ -1,26 +1,10 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import sistemasService from '../services/api/sistemas.service';
+import { sistemasData } from '../data/sistemasData';
 
 function Sistemas() {
-  const [apps, setApps] = useState([]);
+  const [apps] = useState(sistemasData);
   const [query, setQuery] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchSistemas = async () => {
-      try {
-        const data = await sistemasService.getSistemas();
-        setApps(data);
-        setLoading(false);
-      } catch (err) {
-        setError('Error al cargar sistemas');
-        setLoading(false);
-      }
-    };
-    fetchSistemas();
-  }, []);
 
   const filtered = useMemo(() => {
     const qRaw = query.trim();
@@ -39,9 +23,6 @@ function Sistemas() {
       (a.descripcion && a.descripcion.toLowerCase().includes(q))
     );
   }, [query, apps]);
-
-  if (loading) return <div className="loading-spinner">Cargando sistemas...</div>;
-  if (error) return <div className="error-message">{error}</div>;
 
   return (
     <div className="home-page">

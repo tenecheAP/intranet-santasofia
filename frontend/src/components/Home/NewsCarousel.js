@@ -1,29 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { slidersData } from '../../data/slidersData';
 import './NewsCarousel.css';
 
 function NewsCarousel() {
-    const [slides, setSlides] = useState([]);
+    const [slides] = useState(slidersData.filter(s => s.activo));
     const [currentIndex, setCurrentIndex] = useState(0);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        fetchSlides();
-    }, []);
-
-    const fetchSlides = async () => {
-        try {
-            const baseUrl = process.env.REACT_APP_API_URL || '';
-            const url = `${baseUrl}/slider`;
-            const response = await fetch(url);
-            if (response.ok) {
-                const data = await response.json();
-                setSlides(data.filter(s => s.activo));
-            }
-        } catch (error) {
-            console.error('Error loading slides:', error);
-        }
-    };
 
     useEffect(() => {
         if (slides.length <= 1) return;
@@ -41,14 +24,8 @@ function NewsCarousel() {
     const handleSlideClick = (slide) => {
         if (slide.es_interno) {
             navigate(`/anuncio/${slide.id}`);
-        } else if (slide.link) {
-            // Check if link is absolute or relative document
-            if (slide.link.startsWith('http')) {
-                window.open(slide.link, '_blank');
-            } else {
-                // If it's a relative path (e.g. /documentos/...), open in new tab
-                window.open(slide.link, '_blank');
-            }
+        } else if (slide.link && slide.link !== '#') {
+            window.open(slide.link, '_blank');
         }
     };
 
@@ -75,7 +52,7 @@ function NewsCarousel() {
                         style={{ cursor: 'pointer' }}
                     >
                         <img
-                            src={slide.imagen_url.startsWith('http')
+                            src={slide.imagen_url.startsWith('http') || slide.imagen_url.startsWith('/')
                                 ? slide.imagen_url
                                 : `${process.env.REACT_APP_API_URL || ''}${slide.imagen_url}`}
                             alt={slide.titulo}
@@ -98,8 +75,8 @@ function NewsCarousel() {
                                 key={index}
                                 className={`indicator ${currentIndex === index ? 'active' : ''}`}
                                 onClick={(e) => {
-                                    e.stopPropagation();
-                                    goToSlide(index);
+                                     e.stopPropagation();
+                                     goToSlide(index);
                                 }}
                             ></button>
                         ))}

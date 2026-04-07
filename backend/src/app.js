@@ -12,6 +12,7 @@ const app = express();
 const uploadDirs = [
     path.join(__dirname, '../uploads'),
     path.join(__dirname, '../uploads/documents'),
+    path.join(__dirname, '../uploads/sliders'),
     path.join(__dirname, '../uploads/temp')
 ];
 uploadDirs.forEach(dir => {
@@ -28,6 +29,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+app.use('/sliders', express.static(path.join(__dirname, '../uploads/sliders')));
 app.use('/', routes);
 
 module.exports = app;

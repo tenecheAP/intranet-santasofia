@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { categoriasData } from '../data/categoriasData';
 import * as documentsService from '../services/api/documents.service';
-import * as categoriesService from '../services/api/categories.service';
 import './Documental.css';
 
 function Documental() {
@@ -13,7 +13,7 @@ function Documental() {
     const [error, setError] = useState(null);
     const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
     const [editingDoc, setEditingDoc] = useState(null);
-    const [categories, setCategories] = useState([]);
+    const [categories] = useState(categoriasData);
 
     // New Document State
     const [newDoc, setNewDoc] = useState({
@@ -27,17 +27,9 @@ function Documental() {
 
     useEffect(() => {
         loadDocuments();
-        loadCategories();
     }, []);
 
-    const loadCategories = async () => {
-        try {
-            const data = await categoriesService.getCategories();
-            setCategories(data);
-        } catch (err) {
-            console.error('Error loading categories:', err);
-        }
-    };
+
 
     const loadDocuments = async () => {
         try {
@@ -151,53 +143,7 @@ function Documental() {
         });
     };
 
-    const handleAddCategory = async () => {
-        const nombre = prompt('Ingrese el nombre de la nueva categoría:');
-        if (nombre && nombre.trim()) {
-            try {
-                await categoriesService.createCategory(nombre.trim());
-                alert('Categoría creada correctamente.');
-                loadCategories();
-            } catch (err) {
-                console.error('Error creating category:', err);
-                alert(err.message || 'Error al crear la categoría');
-            }
-        }
-    };
 
-    const handleEditCategory = async (cat) => {
-        const nuevoNombre = prompt('Editar nombre de la categoría:', cat.nombre);
-        if (nuevoNombre && nuevoNombre.trim() && nuevoNombre.trim() !== cat.nombre) {
-            try {
-                await categoriesService.updateCategory(cat.id, nuevoNombre.trim());
-                alert('Categoría actualizada correctamente.');
-                loadCategories();
-                loadDocuments(); // Reload docs because cat name might have changed in them
-                if (activeCategory === cat.nombre) {
-                    setActiveCategory(nuevoNombre.trim());
-                }
-            } catch (err) {
-                console.error('Error updating category:', err);
-                alert('Error al actualizar la categoría');
-            }
-        }
-    };
-
-    const handleDeleteCategory = async (cat) => {
-        if (window.confirm(`¿Estás seguro de que deseas eliminar la categoría "${cat.nombre}"?`)) {
-            try {
-                await categoriesService.deleteCategory(cat.id);
-                alert('Categoría eliminada correctamente.');
-                loadCategories();
-                if (activeCategory === cat.nombre) {
-                    setActiveCategory('Todas');
-                }
-            } catch (err) {
-                console.error('Error deleting category:', err);
-                alert(err.message || 'Error al eliminar la categoría. Asegúrate de que no tenga documentos asociados.');
-            }
-        }
-    };
 
     // Get unique category names for sidebar and select
     const categoryNames = ['Todas', ...categories.map(c => c.nombre)];
@@ -370,11 +316,6 @@ function Documental() {
                 <aside className="doc-categories">
                     <div className="side-header">
                         <h3>Secciones</h3>
-                        {user && user.role === 'admin' && (
-                            <button className="add-cat-btn" onClick={handleAddCategory} title="Nueva Categoría">
-                                +
-                            </button>
-                        )}
                     </div>
                     <ul>
                         <li>
@@ -393,16 +334,6 @@ function Documental() {
                                 >
                                     {cat.nombre}
                                 </button>
-                                {user && user.role === 'admin' && (
-                                    <div className="cat-actions">
-                                        <button onClick={() => handleEditCategory(cat)} title="Editar">
-                                            <i className="fas fa-pencil-alt"></i>
-                                        </button>
-                                        <button onClick={() => handleDeleteCategory(cat)} title="Eliminar">
-                                            <i className="fas fa-trash-alt"></i>
-                                        </button>
-                                    </div>
-                                )}
                             </li>
                         ))}
                     </ul>

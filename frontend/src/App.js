@@ -32,7 +32,7 @@ import './App.css';
 function App() {
   return (
     <AuthProvider>
-      <Router>
+      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <div className="app-container">
           <Header />
           <div className="main-content-wrapper">
