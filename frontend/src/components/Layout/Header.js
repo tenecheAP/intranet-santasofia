@@ -129,6 +129,7 @@ function Header() {
                   <Link to="/admin/slider" className="dropdown-item">Gestionar Slider</Link>
                   <Link to="/admin/news" className="dropdown-item">Gestionar Noticias</Link>
                   <Link to="/admin/sistemas" className="dropdown-item">Gestionar Sistemas</Link>
+                  <Link to="/admin/notificaciones" className="dropdown-item">Gestionar Notificaciones</Link>
                   <hr />
                   <button onClick={handleExportDB} className="dropdown-item">Exportar Base de Datos</button>
                   <label className="dropdown-item" style={{ cursor: 'pointer' }}>

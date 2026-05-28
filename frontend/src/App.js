@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { NotificationProvider } from './context/NotificationContext';
+import ToastContainer from './components/Common/ToastContainer';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
 import Home from './pages/Home';
@@ -27,14 +29,17 @@ import NewsAdmin from './pages/NewsAdmin';
 import NewsDetail from './pages/NewsDetail';
 import IndicatorsPage from './pages/IndicatorsPage';
 import SistemasAdmin from './pages/SistemasAdmin';
+import NotificationsAdmin from './pages/NotificationsAdmin';
 import './App.css';
 
 function App() {
   return (
-    <AuthProvider>
-      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <div className="app-container">
-          <Header />
+    <NotificationProvider>
+      <AuthProvider>
+        <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+          <div className="app-container">
+            <ToastContainer />
+            <Header />
           <div className="main-content-wrapper">
             <main className="content-area">
               <Routes>
@@ -70,6 +75,7 @@ function App() {
                 <Route path="/admin/slider" element={<SliderAdmin />} />
                 <Route path="/admin/news" element={<NewsAdmin />} />
                 <Route path="/admin/sistemas" element={<SistemasAdmin />} />
+                <Route path="/admin/notificaciones" element={<NotificationsAdmin />} />
                 <Route path="/anuncio/:id" element={<AnuncioPage />} />
                 <Route path="/noticias" element={<NewsPage />} />
                 <Route path="/noticias/:id" element={<NewsDetail />} />
@@ -81,6 +87,7 @@ function App() {
         </div>
       </Router>
     </AuthProvider>
+</NotificationProvider>
   );
 }
 

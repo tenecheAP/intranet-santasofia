@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
 import NewsCarousel from '../components/Home/NewsCarousel';
 import NewsSidebar from '../components/Home/NewsSidebar';
+import { useNotification } from '../context/NotificationContext';
+import { notificationsData } from '../data/notificationsData';
 
 function Home() {
+  const { showNotification } = useNotification();
+
+  useEffect(() => {
+    const now = new Date();
+    
+    notificationsData.forEach((notification) => {
+      // Convertir fechas de cadena a objetos Date de JS
+      const inicio = new Date(notification.fecha_inicio.replace(' ', 'T'));
+      const fin = new Date(notification.fecha_fin.replace(' ', 'T'));
+      
+      // Mostrar solo si está activa Y el tiempo actual está entre inicio y fin
+      if (notification.activa && now >= inicio && now <= fin) {
+        setTimeout(() => {
+            showNotification(notification.mensaje, notification.tipo, notification.duracion);
+        }, 1000); 
+      }
+    });
+  }, [showNotification]);
   return (
     <div className="home-page">
       <div className="home-hero-grid">
