@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+
+  # =======================================================
+  # 1. Base de Datos (PostgreSQL)
+  # =======================================================
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: user_intranet
+      POSTGRES_PASSWORD: strong_password
+      POSTGRES_DB: intranet_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./backend/src/db/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./backend/src/db/seeds.sql:/docker-entrypoint-initdb.d/2-seeds.sql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U user_intranet -d intranet_db" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # =======================================================
+  # 2. Backend API (Node.js/Express - Producción)
+  # =======================================================
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: production
+      DB_HOST: ${DB_HOST:-db}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_USER: ${DB_USER:-user_intranet}
+      DB_PASSWORD: ${DB_PASSWORD:-strong_password}
+      DB_NAME: ${DB_NAME:-intranet_db}
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # =======================================================
+  # 3. Frontend (React - Producción con Nginx)
+  # =======================================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - REACT_APP_API_URL=http://${SERVER_IP:-localhost}:3001
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    # No montamos volúmenes de código fuente porque servimos archivos estáticos compilados
+
+volumes:
+  db-data:

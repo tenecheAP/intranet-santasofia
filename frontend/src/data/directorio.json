@@ -1,0 +1,642 @@
+[
+    {
+        "departamento": "AGREMIACIÓN SACYL",
+        "extension": "027"
+    },
+    {
+        "departamento": "EVENTOS ADVERSOS",
+        "extension": "333-038"
+    },
+    {
+        "departamento": "NUTRICIONISTAS",
+        "extension": "036-632"
+    },
+    {
+        "departamento": "ACREDITACIÓN",
+        "extension": "732"
+    },
+    {
+        "departamento": "FACTURACIÓN AUTORIZACIONES",
+        "extension": "004-455"
+    },
+    {
+        "departamento": "PARQUEADERO",
+        "extension": "630"
+    },
+    {
+        "departamento": "ADMINISTRACIÓN DE RECURSOS",
+        "extension": "8932752"
+    },
+    {
+        "departamento": "FACTURACIÓN AUXILIAR SOAT",
+        "extension": "110"
+    },
+    {
+        "departamento": "PBX",
+        "extension": "8879200-8932750-8932640"
+    },
+    {
+        "departamento": "ADMINISTRACIÓN DE RECURSOS (AUX)",
+        "extension": "520"
+    },
+    {
+        "departamento": "FACTURACIÓN CARDIOLOGÍA NO INVASIVA",
+        "extension": "017"
+    },
+    {
+        "departamento": "PENSION",
+        "extension": "200"
+    },
+    {
+        "departamento": "ADMINISTRACION DE TIC'S-SISTEMAS",
+        "extension": "509"
+    },
+    {
+        "departamento": "FACTURACIÓN CENTRAL",
+        "extension": "010-015-009"
+    },
+    {
+        "departamento": "PLANEACION E INFORMACION",
+        "extension": "506"
+    },
+    {
+        "departamento": "ALMACEN",
+        "extension": "623"
+    },
+    {
+        "departamento": "FACTURACIÓN CENTRO CARDIOVASCULAR HEMODINAMIA",
+        "extension": "122"
+    },
+    {
+        "departamento": "PLANEACIÓN E INFORMACIÓN",
+        "extension": "8932646"
+    },
+    {
+        "departamento": "ALMACEN CENTRO CARDIOVASCULAR - HEMODINAMIA",
+        "extension": "124"
+    },
+    {
+        "departamento": "FACTURACIÓN INTERMEDIOS B",
+        "extension": "127"
+    },
+    {
+        "departamento": "PORTERIA",
+        "extension": "500"
+    },
+    {
+        "departamento": "AMBULATORIOS",
+        "extension": "109"
+    },
+    {
+        "departamento": "FACTURACIÓN PENSIÓN",
+        "extension": "212"
+    },
+    {
+        "departamento": "PROCEDIMIENTOS DE ENFERMERIA",
+        "extension": "615-635"
+    },
+    {
+        "departamento": "ARCHIVO PASIVO",
+        "extension": "020"
+    },
+    {
+        "departamento": "FACTURACIÓN QUIROFANOS",
+        "extension": "218"
+    },
+    {
+        "departamento": "PROGRAMACION DE CIRUGIAS - AMBULATORIOS",
+        "extension": "105"
+    },
+    {
+        "departamento": "ASESOR DE CONTROL INTERNO",
+        "extension": "634"
+    },
+    {
+        "departamento": "FACTURACIÓN RX-OFICINA",
+        "extension": "738"
+    },
+    {
+        "departamento": "QUIR CENTRAL ESTERILIZACIÓN",
+        "extension": "226"
+    },
+    {
+        "departamento": "ASESOR GARANTÍA CALIDAD",
+        "extension": "530"
+    },
+    {
+        "departamento": "FACTURACIÓN SALA NORTE",
+        "extension": "317"
+    },
+    {
+        "departamento": "QUIRÓFANOS",
+        "extension": "225"
+    },
+    {
+        "departamento": "ASESORÍA JURIDICA",
+        "extension": "402-432"
+    },
+    {
+        "departamento": "FACTURACIÓN SALA SUR",
+        "extension": "311"
+    },
+    {
+        "departamento": "RADIOLOGIA CITAS",
+        "extension": "123"
+    },
+    {
+        "departamento": "ASESORIA JURIDICA GERENCIA",
+        "extension": "531"
+    },
+    {
+        "departamento": "FACTURACIÓN UCI MEDICA",
+        "extension": "301"
+    },
+    {
+        "departamento": "RADIOLOGIA TECNICOS",
+        "extension": "126"
+    },
+    {
+        "departamento": "ASIGNACIÓN DE CITAS",
+        "extension": "8932643"
+    },
+    {
+        "departamento": "FACTURACIÓN URGENCIAS",
+        "extension": "407"
+    },
+    {
+        "departamento": "RECEPCIÓN ADMINISTRATIVA",
+        "extension": "118-555-511"
+    },
+    {
+        "departamento": "AUDITORÍA CONCURRENTE-CUENTAS MÉDICAS",
+        "extension": "037"
+    },
+    {
+        "departamento": "FACTURACIÓN-GLOSAS Y DEVOLUCIONES",
+        "extension": "023"
+    },
+    {
+        "departamento": "RECEPCIÓN CONSULTA EXTERNA",
+        "extension": "618"
+    },
+    {
+        "departamento": "AUDITORIA MEDICA - ESTANCIAS-EGRESOS",
+        "extension": "024"
+    },
+    {
+        "departamento": "FARMACIA",
+        "extension": "147"
+    },
+    {
+        "departamento": "RECEPCION IMÁGENES DIAGNOSTICAS",
+        "extension": "008"
+    },
+    {
+        "departamento": "AUTORIZACIONES-AMBULATORIOS",
+        "extension": "102"
+    },
+    {
+        "departamento": "FARMACIA CENTRAL ADEC. MEDI",
+        "extension": "643"
+    },
+    {
+        "departamento": "RECUPERACION",
+        "extension": "220"
+    },
+    {
+        "departamento": "CAFETERIA",
+        "extension": "006"
+    },
+    {
+        "departamento": "FARMACIA DISPENSACION",
+        "extension": "146"
+    },
+    {
+        "departamento": "REFERENCIA Y CONTRA-REFERENCIA",
+        "extension": "400"
+    },
+    {
+        "departamento": "CARTERA",
+        "extension": "503"
+    },
+    {
+        "departamento": "FARMACIA FARMACOVIGILANCIA",
+        "extension": "149"
+    },
+    {
+        "departamento": "REHABILITACIÓN CARDIACA",
+        "extension": "619"
+    },
+    {
+        "departamento": "CENTRAL ADECUACIÓN DE MEDICAMENTOS",
+        "extension": "629"
+    },
+    {
+        "departamento": "FARMACIA NO POS",
+        "extension": "148"
+    },
+    {
+        "departamento": "RESONADOR",
+        "extension": "021"
+    },
+    {
+        "departamento": "CENTRAL ESTERILIZACIÓN QUIROFANOS",
+        "extension": "223"
+    },
+    {
+        "departamento": "FARMACIA-BODEGA",
+        "extension": "642-644"
+    },
+    {
+        "departamento": "SALA NORTE",
+        "extension": "316"
+    },
+    {
+        "departamento": "CENTRAL MATERIALES",
+        "extension": "216"
+    },
+    {
+        "departamento": "FARMACIA-QUIROFANO",
+        "extension": "213"
+    },
+    {
+        "departamento": "SALA NORTE MÉDICOS",
+        "extension": "328"
+    },
+    {
+        "departamento": "CENTRO CARDIOVASCULAR-HEMODINAMIA FAX",
+        "extension": "112"
+    },
+    {
+        "departamento": "FAX",
+        "extension": "8932641"
+    },
+    {
+        "departamento": "SALA SUR",
+        "extension": "310"
+    },
+    {
+        "departamento": "CITAS PARTICULARES-VIVIR MEJOR-PREPAGADA",
+        "extension": "752"
+    },
+    {
+        "departamento": "FINANCIERA",
+        "extension": "507"
+    },
+    {
+        "departamento": "SALA SUR MEDICOS",
+        "extension": "327-326"
+    },
+    {
+        "departamento": "COCINA-ECOΝΟΜΑΤΟ",
+        "extension": "001"
+    },
+    {
+        "departamento": "FINANCIERA (EXTERNA)",
+        "extension": "8932649"
+    },
+    {
+        "departamento": "SERVICIO DE ALIMENTACIÓN-COCINA",
+        "extension": "000"
+    },
+    {
+        "departamento": "COMUNICACIÓN Y MERCADEO",
+        "extension": "8932751"
+    },
+    {
+        "departamento": "FINANCIERA (OFICINA)",
+        "extension": "736"
+    },
+    {
+        "departamento": "COMUNICACIÓN Y MERCADEO-Oficina",
+        "extension": "753"
+    },
+    {
+        "departamento": "FISIOTERAPIΑ",
+        "extension": "624"
+    },
+    {
+        "departamento": "SIAU/TRABAJO SOCIAL",
+        "extension": "723-808"
+    },
+    {
+        "departamento": "CONSOLA",
+        "extension": "100"
+    },
+    {
+        "departamento": "GARANTIA CALIDAD/SEGURIDAD DEL PACIENTE",
+        "extension": "519-539"
+    },
+    {
+        "departamento": "SIAU-ATENCIÓN AL USUARIO",
+        "extension": "8932642"
+    },
+    {
+        "departamento": "CONSULTA EXTERNA",
+        "extension": "600"
+    },
+    {
+        "departamento": "GERENCIA",
+        "extension": "523"
+    },
+    {
+        "departamento": "SUBDIRECCIÓN CIENTÍFICA OFICINA",
+        "extension": "025"
+    },
+    {
+        "departamento": "CONSULTA EXTERNA-PUESTO ENFERMERIA",
+        "extension": "626"
+    },
+    {
+        "departamento": "GERENCIA SECRETARIA (EXTERNA)",
+        "extension": "8932648"
+    },
+    {
+        "departamento": "SUBDIRECTOR CIENTIFICO",
+        "extension": "026"
+    },
+    {
+        "departamento": "CONTABILIDAD",
+        "extension": "510"
+    },
+    {
+        "departamento": "GERENCIA SECRETARIA",
+        "extension": "502"
+    },
+    {
+        "departamento": "SUPERVISOR CENTRO CONTACTO",
+        "extension": "728"
+    },
+    {
+        "departamento": "CONTROL INTERNO OFICINA",
+        "extension": "627"
+    },
+    {
+        "departamento": "GESTIÓN DEL RIESGO",
+        "extension": "039"
+    },
+    {
+        "departamento": "TALENTO HUMANO",
+        "extension": "501-505"
+    },
+    {
+        "departamento": "COORDINACIÓN APOYO LOGISTICO",
+        "extension": "012"
+    },
+    {
+        "departamento": "GESTIÓN DOCUMENTAL ADMINISTRATIVA",
+        "extension": "115"
+    },
+    {
+        "departamento": "TALENTO HUMANO (EXTERNA)",
+        "extension": "8932647"
+    },
+    {
+        "departamento": "COORDINACIÓN CARDIOLOGÍA NO INVASIVA",
+        "extension": "018"
+    },
+    {
+        "departamento": "GESTION DOCUMENTAL CLINICA (ESTADISTICA)",
+        "extension": "620-622"
+    },
+    {
+        "departamento": "TALENTO HUMANO PSICOLOGA",
+        "extension": "526"
+    },
+    {
+        "departamento": "COORDINACIÓN CENTRO CARDIOVASCULAR - HEMODINAMIA",
+        "extension": "111"
+    },
+    {
+        "departamento": "IMAGENES ECOGRAFIA",
+        "extension": "132-130"
+    },
+    {
+        "departamento": "TALLER DE SISTEMAS",
+        "extension": "413-032"
+    },
+    {
+        "departamento": "COORDINACION CENTRO DE CONTACTO",
+        "extension": "739"
+    },
+    {
+        "departamento": "IMAGENES ENDOSCOPIA",
+        "extension": "120"
+    },
+    {
+        "departamento": "TALLER ELECTRICOS",
+        "extension": "022"
+    },
+    {
+        "departamento": "COORDINACIÓN CONSULTA EXTERNA",
+        "extension": "628"
+    },
+    {
+        "departamento": "INVENTARIOS",
+        "extension": "114-758"
+    },
+    {
+        "departamento": "TALLER MANTENIMIENTO BIOMEDICO",
+        "extension": "113"
+    },
+    {
+        "departamento": "COORDINACIÓN DE AUDITORIA MÉDICA",
+        "extension": "035"
+    },
+    {
+        "departamento": "INVESTIGACIÓN Y ENTRENAMIENTO",
+        "extension": "756"
+    },
+    {
+        "departamento": "TARJETA VIVIR MEJOR",
+        "extension": "8932645"
+    },
+    {
+        "departamento": "COORDINACIÓN DE ENFERMERIA",
+        "extension": "016"
+    },
+    {
+        "departamento": "JEFATURA ADMINISTRACIÓN DE RECURSOS",
+        "extension": "512"
+    },
+    {
+        "departamento": "TERAPIA OCUPACIONAL Y FONOAUDIOLOGIA",
+        "extension": "735"
+    },
+    {
+        "departamento": "COORDINACIÓN DE PLANEACIÓN E INFORMACIÓN",
+        "extension": "517"
+    },
+    {
+        "departamento": "JEFATURA ALMACEN",
+        "extension": "633"
+    },
+    {
+        "departamento": "TESORERIA",
+        "extension": "504"
+    },
+    {
+        "departamento": "COORDINACION DE URGENCIAS",
+        "extension": "408"
+    },
+    {
+        "departamento": "JEFATURA COMUNICACIÓN Y MERCADEO",
+        "extension": "750"
+    },
+    {
+        "departamento": "TESORERIA (EXTERNA)",
+        "extension": "8932753"
+    },
+    {
+        "departamento": "COORDINACIÓN FACTURACION",
+        "extension": "1007"
+    },
+    {
+        "departamento": "JEFATURA FINANCIERA",
+        "extension": "550"
+    },
+    {
+        "departamento": "TOMOGRAFO",
+        "extension": "131"
+    },
+    {
+        "departamento": "COORDINACIÓN HIGIENE Y MANTENIMIENTO",
+        "extension": "044"
+    },
+    {
+        "departamento": "JEFE ENFERMERÍA PENSIÓN",
+        "extension": "129"
+    },
+    {
+        "departamento": "TUTELAS",
+        "extension": "034"
+    },
+    {
+        "departamento": "JUDICANTE",
+        "extension": "404"
+    },
+    {
+        "departamento": "U.C.I. MÉDICA",
+        "extension": "300-302"
+    },
+    {
+        "departamento": "COORDINACION IMAGENES DIAGNOSTICAS",
+        "extension": "822"
+    },
+    {
+        "departamento": "LABORATORIO CLINICO-FAX",
+        "extension": "424"
+    },
+    {
+        "departamento": "U.C.I. OFICINA",
+        "extension": "221"
+    },
+    {
+        "departamento": "COORDINACIÓN IMÁGENOLOGÍA",
+        "extension": "121"
+    },
+    {
+        "departamento": "LABORATORIO CLINICO-GENERALES",
+        "extension": "423"
+    },
+    {
+        "departamento": "U.C.I. QUIRÚRGICA",
+        "extension": "222"
+    },
+    {
+        "departamento": "COORDINACION INGENIERÍA BIOMEDICA",
+        "extension": "144"
+    },
+    {
+        "departamento": "LABORATORIO CLÍNICO-MICROBIOLOGÍA",
+        "extension": "425"
+    },
+    {
+        "departamento": "UNIDAD DE CUIDADOS INTERMEDIOS A",
+        "extension": "140-141"
+    },
+    {
+        "departamento": "COORDINACIÓN INVESTIGACIÓN Y ENTRENAMIENTO",
+        "extension": "757"
+    },
+    {
+        "departamento": "LABORATORIO CLÍNICO-QUIMICAS",
+        "extension": "426"
+    },
+    {
+        "departamento": "UNIDAD DE CUIDADOS INTERMEDIOS B",
+        "extension": "127"
+    },
+    {
+        "departamento": "COORDINACIÓN LABORATORIO CLINICO",
+        "extension": "428"
+    },
+    {
+        "departamento": "LABORATORIO CLINICO-RECEPCIÓN",
+        "extension": "422"
+    },
+    {
+        "departamento": "URGENCIAS",
+        "extension": "403-002"
+    },
+    {
+        "departamento": "COORDINACIÓN MENSAJERÍA",
+        "extension": "003"
+    },
+    {
+        "departamento": "LABORATORIO DE EPILEPSIA",
+        "extension": "145"
+    },
+    {
+        "departamento": "URGENCIAS (LINEA 2)",
+        "extension": "8932644"
+    },
+    {
+        "departamento": "COORDINACIÓN SERVICIO FARMACEUTICO",
+        "extension": "641"
+    },
+    {
+        "departamento": "LABORATORIO DE HEMATOLOGÍA",
+        "extension": "427"
+    },
+    {
+        "departamento": "URGENCIAS CONSULTORIO 1",
+        "extension": "401"
+    },
+    {
+        "departamento": "COSTOS-PROYECCION OPERACIONAL",
+        "extension": "515"
+    },
+    {
+        "departamento": "LABORATORIO PATOLOGIA",
+        "extension": "421"
+    },
+    {
+        "departamento": "URGENCIAS FAX",
+        "extension": "406"
+    },
+    {
+        "departamento": "CARPA COVID",
+        "extension": "514"
+    },
+    {
+        "departamento": "LINEA DE EMERGENCIAS",
+        "extension": "444"
+    },
+    {
+        "departamento": "VENTANILLA ÚNICA",
+        "extension": "625"
+    },
+    {
+        "departamento": "ESTACIÓN DE ENFERMERIA UCI-COVID",
+        "extension": "637-720"
+    },
+    {
+        "departamento": "LINEA GRATUITA NACIONAL",
+        "extension": "018000413610"
+    },
+    {
+        "departamento": "ZONA DE TRANSITO",
+        "extension": "513"
+    }
+]

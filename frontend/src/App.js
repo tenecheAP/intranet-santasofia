@@ -1,0 +1,99 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import { NotificationProvider } from './context/NotificationContext';
+import ToastContainer from './components/Common/ToastContainer';
+import PageTracker from './components/Common/PageTracker';
+
+import Header from './components/Layout/Header';
+import Footer from './components/Layout/Footer';
+import Home from './pages/Home';
+import GPC from './pages/GPC';
+import Sistemas from './pages/Sistemas';
+import HelpDesk from './pages/HelpDesk';
+import Documental from './pages/Documental';
+import Plataforma from './pages/Plataforma';
+import Historia from './pages/Historia';
+import Directorio from './pages/Directorio';
+import MapaProcesos from './pages/MapaProcesos';
+import Calidad from './pages/Calidad';
+import SeguridadPaciente from './pages/SeguridadPaciente';
+import Protocolos from './pages/Protocolos';
+import Biomedica from './pages/Biomedica';
+import TalentoHumano from './pages/TalentoHumano';
+import Juridica from './pages/Juridica';
+import Financiera from './pages/Financiera';
+import PlaceholderPage from './pages/PlaceholderPage';
+import SliderAdmin from './pages/SliderAdmin';
+import AnuncioPage from './pages/AnuncioPage';
+import NewsPage from './pages/NewsPage';
+import NewsAdmin from './pages/NewsAdmin';
+import AnalyticsAdmin from './pages/AnalyticsAdmin';
+import NewsDetail from './pages/NewsDetail';
+import IndicatorsPage from './pages/IndicatorsPage';
+import SistemasAdmin from './pages/SistemasAdmin';
+import NotificationsAdmin from './pages/NotificationsAdmin';
+import './App.css';
+
+function App() {
+  return (
+    <NotificationProvider>
+      <AuthProvider>
+        <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+          <div className="app-container">
+            <ToastContainer />
+            <Header />
+            <PageTracker />
+          <div className="main-content-wrapper">
+            <main className="content-area">
+              <Routes>
+                <Route path="/" element={<Home />} />
+
+                {/* Institucional */}
+                <Route path="/institucional/plataforma" element={<Plataforma />} />
+                <Route path="/institucional/historia" element={<Historia />} />
+                <Route path="/institucional/directorio" element={<Directorio />} />
+
+                {/* Procesos */}
+                <Route path="/procesos/mapa" element={<MapaProcesos />} />
+                <Route path="/procesos/calidad" element={<Calidad />} />
+                <Route path="/procesos/seguridad-paciente" element={<SeguridadPaciente />} />
+
+                {/* Asistencial */}
+                <Route path="/gpc" element={<GPC />} />
+                <Route path="/asistencial/protocolos" element={<Protocolos />} />
+                <Route path="/asistencial/biomedica" element={<Biomedica />} />
+
+                {/* Administrativo */}
+                <Route path="/administrativo/talento-humano" element={<TalentoHumano />} />
+                <Route path="/administrativo/juridica" element={<Juridica />} />
+                <Route path="/administrativo/financiera" element={<Financiera />} />
+
+                {/* Otros */}
+                <Route path="/indicadores" element={<IndicatorsPage />} />
+                <Route path="/sistemas" element={<Sistemas />} />
+                <Route path="/mesa-de-ayuda" element={<HelpDesk />} />
+                <Route path="/documental" element={<Documental />} />
+
+                {/* Admin & Dynamic Content */}
+                <Route path="/admin/slider" element={<SliderAdmin />} />
+                <Route path="/admin/news" element={<NewsAdmin />} />
+                <Route path="/admin/sistemas" element={<SistemasAdmin />} />
+                <Route path="/admin/notificaciones" element={<NotificationsAdmin />} />
+                <Route path="/admin/analytics" element={<AnalyticsAdmin />} />
+                <Route path="/anuncio/:id" element={<AnuncioPage />} />
+                <Route path="/noticias" element={<NewsPage />} />
+                <Route path="/noticias/:id" element={<NewsDetail />} />
+
+              </Routes>
+            </main>
+          </div>
+          <Footer />
+        </div>
+      </Router>
+    </AuthProvider>
+</NotificationProvider>
+  );
+}
+
+export default App;

@@ -1,0 +1,30 @@
+/* src/App.css */
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content-wrapper {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  /* Center content */
+  background-color: #f4f6f8;
+  /* Un fondo global suave */
+}
+
+.content-area {
+  flex: 1;
+  width: 100%;
+  max-width: 1400px;
+  /* Ancho máximo para pantallas grandes */
+  padding: 0;
+  /* El padding lo manejan las páginas individualmente si es necesario, o global aquí */
+  background-color: transparent;
+  /* Remove background white box from container to let page handle it */
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+}

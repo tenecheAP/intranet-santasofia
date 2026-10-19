@@ -1,0 +1,96 @@
+-- Crear tabla de usuarios
+CREATE TABLE IF NOT EXISTS usuarios (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    rol VARCHAR(20) DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Crear tabla de documentos
+CREATE TABLE IF NOT EXISTS documentos (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(200) NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
+    tipo VARCHAR(10) NOT NULL,
+    fecha DATE DEFAULT CURRENT_DATE,
+    url VARCHAR(500),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Crear tabla de directorio
+CREATE TABLE IF NOT EXISTS directorio (
+    id SERIAL PRIMARY KEY,
+    departamento VARCHAR(255) NOT NULL,
+    extension VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Crear tabla de anuncios
+CREATE TABLE IF NOT EXISTS anuncios (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(200) NOT NULL,
+    imagen_url VARCHAR(500) NOT NULL,
+    link VARCHAR(500),
+    es_interno BOOLEAN DEFAULT FALSE,
+    contenido TEXT,
+    resumen VARCHAR(500),
+    orden INTEGER DEFAULT 0,
+    activo BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Crear tabla de noticias
+CREATE TABLE IF NOT EXISTS noticias (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(200) NOT NULL,
+    contenido TEXT NOT NULL,
+    imagen_url VARCHAR(500),
+    fecha_publicacion DATE DEFAULT CURRENT_DATE,
+    autor VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Crear tabla de sistemas y aplicativos
+CREATE TABLE IF NOT EXISTS sistemas (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(200) NOT NULL,
+    descripcion TEXT,
+    url VARCHAR(500) NOT NULL,
+    interno BOOLEAN DEFAULT FALSE,
+    orden INTEGER DEFAULT 0,
+    activo BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+-- Crear tabla de categorias de documentos
+CREATE TABLE IF NOT EXISTS categorias_documentos (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Crear tabla de visitas (analytics)
+-- La mayoría de visitas serán anónimas; usuario_id/usuario_nombre solo se llenan si el visitante está logueado
+CREATE TABLE IF NOT EXISTS visitas (
+    id SERIAL PRIMARY KEY,
+    session_id VARCHAR(64),
+    usuario_id INTEGER,
+    usuario_nombre VARCHAR(100),
+    pagina VARCHAR(255) NOT NULL,
+    titulo_pagina VARCHAR(255),
+    pagina_origen VARCHAR(255),
+    accion VARCHAR(50) DEFAULT 'pageview',
+    ip_address VARCHAR(45),
+    user_agent TEXT,
+    navegador VARCHAR(50),
+    sistema_operativo VARCHAR(50),
+    tipo_dispositivo VARCHAR(20) DEFAULT 'desktop',
+    resolucion_pantalla VARCHAR(20),
+    duracion_segundos INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_visitas_fecha ON visitas (created_at);
+CREATE INDEX IF NOT EXISTS idx_visitas_pagina ON visitas (pagina);
+CREATE INDEX IF NOT EXISTS idx_visitas_session ON visitas (session_id);

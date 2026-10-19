@@ -1,0 +1,97 @@
+/* src/components/Home/NewsSidebar.css */
+.news-sidebar {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+}
+
+.news-sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--color-secondary);
+    padding-bottom: 0.5rem;
+}
+
+.news-sidebar-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--color-primary);
+}
+
+.view-all {
+    font-size: 0.85rem;
+    color: var(--color-secondary);
+    font-weight: 600;
+}
+
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.news-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-date {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-accent);
+}
+
+.news-title {
+    font-size: 0.95rem;
+    color: var(--color-text-main);
+    font-weight: 500;
+    line-height: 1.4;
+    transition: color 0.2s;
+}
+
+.news-title:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.quick-links {
+    margin-top: 2rem;
+}
+
+.quick-links h4 {
+    font-size: 1rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.quick-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.quick-links ul li {
+    margin-bottom: 0.5rem;
+}
+
+.quick-links ul li a {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+}
+
+.quick-links ul li a:hover {
+    color: var(--color-secondary);
+}
