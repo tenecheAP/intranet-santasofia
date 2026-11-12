@@ -9,6 +9,7 @@ const categoriesRoutes = require('./categories.routes');
 const sistemasRoutes = require('./sistemas.routes');
 const dbRoutes = require('./db.routes');
 const analyticsRoutes = require('./analytics.routes');
+const notificationsRoutes = require('./notifications.routes');
 
 router.use('/directory', directoryRoutes);
 router.use('/slider', sliderRoutes);
@@ -17,6 +18,7 @@ router.use('/documents', documentsRoutes);
 router.use('/categories', categoriesRoutes);
 router.use('/db', dbRoutes);
 router.use('/analytics', analyticsRoutes);
+router.use('/notifications', notificationsRoutes);
 router.use(sistemasRoutes);
 router.get('/health', healthController.health);
 router.get('/gpc', (req, res) => {

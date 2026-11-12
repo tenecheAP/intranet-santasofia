@@ -48,7 +48,10 @@ Write-Host "📋 Copiando archivos del proyecto..." -ForegroundColor Cyan
 $itemsToCopy = @(
     "backend",
     "frontend",
+    "database",
+    "scripts",
     "docker-compose.yml",
+    "docker-compose.prod.yml",
     "README.md",
     "deploy.ps1",
     "deploy.sh",

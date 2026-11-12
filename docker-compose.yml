@@ -21,8 +21,9 @@ services:
       # Scripts de inicialización (se ejecutan solo si la DB está vacía)
       # - ./backend/src/db/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
       # - ./backend/src/db/seeds.sql:/docker-entrypoint-initdb.d/2-seeds.sql
-      # Usar el backup como punto de partida:
+      # Usar el backup como punto de partida y asegurar esquema completo:
       - ./database/intranet_backup_fixed.sql:/docker-entrypoint-initdb.d/1-init.sql
+      - ./backend/src/db/schema.sql:/docker-entrypoint-initdb.d/2-schema.sql
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U user_intranet -d intranet_db" ]
       interval: 10s

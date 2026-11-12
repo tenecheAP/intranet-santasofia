@@ -4,26 +4,43 @@ import { Link } from 'react-router-dom';
 import NewsCarousel from '../components/Home/NewsCarousel';
 import NewsSidebar from '../components/Home/NewsSidebar';
 import { useNotification } from '../context/NotificationContext';
-import { notificationsData } from '../data/notificationsData';
+import { getActiveNotifications } from '../services/api/notifications.service';
 
 function Home() {
   const { showNotification } = useNotification();
 
   useEffect(() => {
-    const now = new Date();
-    
-    notificationsData.forEach((notification) => {
-      // Convertir fechas de cadena a objetos Date de JS
-      const inicio = new Date(notification.fecha_inicio.replace(' ', 'T'));
-      const fin = new Date(notification.fecha_fin.replace(' ', 'T'));
-      
-      // Mostrar solo si está activa Y el tiempo actual está entre inicio y fin
-      if (notification.activa && now >= inicio && now <= fin) {
-        setTimeout(() => {
-            showNotification(notification.mensaje, notification.tipo, notification.duracion);
-        }, 1000); 
+    let isMounted = true;
+
+    const loadNotifications = async () => {
+      try {
+        const activeList = await getActiveNotifications();
+        if (!isMounted || !Array.isArray(activeList)) return;
+
+        const now = new Date();
+        activeList.forEach((notification, index) => {
+          const inicio = new Date(notification.fecha_inicio);
+          const fin = new Date(notification.fecha_fin);
+
+          // Verificar adicionalmente en cliente que esté vigente
+          if (notification.activa && now >= inicio && now <= fin) {
+            setTimeout(() => {
+              if (isMounted) {
+                showNotification(notification.mensaje, notification.tipo, notification.duracion);
+              }
+            }, 800 + (index * 400));
+          }
+        });
+      } catch (error) {
+        console.warn('No se pudieron cargar las notificaciones activas:', error.message);
       }
-    });
+    };
+
+    loadNotifications();
+
+    return () => {
+      isMounted = false;
+    };
   }, [showNotification]);
   return (
     <div className="home-page">

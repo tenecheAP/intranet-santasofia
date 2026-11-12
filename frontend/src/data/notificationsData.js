@@ -1,5 +1,8 @@
 // frontend/src/data/notificationsData.js
-// Configuración de avisos globales de la Intranet con programación de fechas
+// [DEPRECADO] Este archivo ya no se utiliza en el sistema.
+// Las notificaciones ahora se gestionan y guardan en la base de datos PostgreSQL
+// y son completamente editables en tiempo real desde el panel:
+// URL: /admin/notificaciones (requiere iniciar sesión como Administrador).
 
 export const notificationsData = [
     {

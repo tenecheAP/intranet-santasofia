@@ -191,3 +191,9 @@ INSERT INTO categorias_documentos (nombre) VALUES
 ('Jurídica'),
 ('Contratación')
 ON CONFLICT (nombre) DO NOTHING;
+
+-- Insertar notificaciones iniciales del sistema
+INSERT INTO notificaciones (titulo, mensaje, tipo, activa, duracion, fecha_inicio, fecha_fin) VALUES
+('Bienvenida', '¡Bienvenido a la nueva Intranet de Santa Sofía!', 'success', true, 8000, '2025-01-01 00:00:00', '2026-12-31 23:59:59'),
+('Mantenimiento', 'Mantenimiento programado: El próximo domingo a las 02:00 AM se realizarán ajustes en el servidor.', 'warning', true, 0, '2025-04-07 00:00:00', '2026-12-31 23:59:59');
+

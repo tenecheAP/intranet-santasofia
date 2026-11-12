@@ -61,6 +61,11 @@ echo ""
 echo "📊 Estado de los servicios:"
 docker compose ps
 
+# Sincronizar y verificar base de datos
+echo ""
+echo "🗄️ Verificando tablas de la base de datos en Docker..."
+docker compose exec -T api node migrate_notificaciones.js 2>/dev/null || true
+
 # Verificar la salud de la API
 echo ""
 echo "🔍 Verificando la API..."

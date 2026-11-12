@@ -64,6 +64,16 @@ Write-Host ""
 Write-Host "📊 Estado de los servicios:" -ForegroundColor Cyan
 docker compose ps
 
+# Verificar / Sincronizar Base de Datos
+Write-Host ""
+Write-Host "🗄️ Verificando tablas de la base de datos..." -ForegroundColor Cyan
+try {
+    docker compose exec -T api node migrate_notificaciones.js
+    Write-Host "✅ Tablas de la base de datos verificadas y sincronizadas." -ForegroundColor Green
+} catch {
+    Write-Host "⚠️  Nota al verificar DB: $($_.Exception.Message)" -ForegroundColor Yellow
+}
+
 # Verificar la salud de la API
 Write-Host ""
 Write-Host "🔍 Verificando la API..." -ForegroundColor Cyan

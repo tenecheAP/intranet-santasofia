@@ -94,3 +94,20 @@ CREATE TABLE IF NOT EXISTS visitas (
 CREATE INDEX IF NOT EXISTS idx_visitas_fecha ON visitas (created_at);
 CREATE INDEX IF NOT EXISTS idx_visitas_pagina ON visitas (pagina);
 CREATE INDEX IF NOT EXISTS idx_visitas_session ON visitas (session_id);
+
+-- Crear tabla de notificaciones (toasts y avisos globales)
+CREATE TABLE IF NOT EXISTS notificaciones (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(200),
+    mensaje TEXT NOT NULL,
+    tipo VARCHAR(20) DEFAULT 'info',
+    activa BOOLEAN DEFAULT TRUE,
+    duracion INTEGER DEFAULT 5000,
+    fecha_inicio TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fecha_fin TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_notificaciones_vigentes ON notificaciones (activa, fecha_inicio, fecha_fin);
+

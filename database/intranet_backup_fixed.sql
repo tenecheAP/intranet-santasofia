@@ -1,4 +1,4 @@
-﻿--
+--
 -- PostgreSQL database dump
 --
 
@@ -550,6 +550,77 @@ ALTER TABLE ONLY public.usuarios
 ALTER TABLE ONLY public.usuarios
     ADD CONSTRAINT usuarios_username_key UNIQUE (username);
 
+-- ==============================================================
+-- Tablas adicionales del sistema (Sistemas, Categorías, Visitas, Notificaciones)
+-- ==============================================================
+
+CREATE TABLE IF NOT EXISTS public.sistemas (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(200) NOT NULL,
+    descripcion TEXT,
+    url VARCHAR(500) NOT NULL,
+    interno BOOLEAN DEFAULT FALSE,
+    orden INTEGER DEFAULT 0,
+    activo BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS public.categorias_documentos (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS public.visitas (
+    id SERIAL PRIMARY KEY,
+    session_id VARCHAR(64),
+    usuario_id INTEGER,
+    usuario_nombre VARCHAR(100),
+    pagina VARCHAR(255) NOT NULL,
+    titulo_pagina VARCHAR(255),
+    pagina_origen VARCHAR(255),
+    accion VARCHAR(50) DEFAULT 'pageview',
+    ip_address VARCHAR(45),
+    user_agent TEXT,
+    navegador VARCHAR(50),
+    sistema_operativo VARCHAR(50),
+    tipo_dispositivo VARCHAR(20) DEFAULT 'desktop',
+    resolucion_pantalla VARCHAR(20),
+    duracion_segundos INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_visitas_fecha ON public.visitas (created_at);
+CREATE INDEX IF NOT EXISTS idx_visitas_pagina ON public.visitas (pagina);
+CREATE INDEX IF NOT EXISTS idx_visitas_session ON public.visitas (session_id);
+
+CREATE TABLE IF NOT EXISTS public.notificaciones (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(200),
+    mensaje TEXT NOT NULL,
+    tipo VARCHAR(20) DEFAULT 'info',
+    activa BOOLEAN DEFAULT TRUE,
+    duracion INTEGER DEFAULT 5000,
+    fecha_inicio TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    fecha_fin TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_notificaciones_vigentes ON public.notificaciones (activa, fecha_inicio, fecha_fin);
+
+-- Semillas iniciales
+INSERT INTO public.categorias_documentos (nombre) VALUES
+('Gestión de Calidad'),
+('Talento Humano'),
+('Jurídica'),
+('Contratación')
+ON CONFLICT (nombre) DO NOTHING;
+
+INSERT INTO public.notificaciones (titulo, mensaje, tipo, activa, duracion, fecha_inicio, fecha_fin) VALUES
+('Bienvenida', '¡Bienvenido a la nueva Intranet de Santa Sofía!', 'success', true, 8000, '2025-01-01 00:00:00', '2026-12-31 23:59:59'),
+('Mantenimiento', 'Mantenimiento programado: El próximo domingo a las 02:00 AM se realizarán ajustes en el servidor.', 'warning', true, 0, '2025-04-07 00:00:00', '2026-12-31 23:59:59')
+ON CONFLICT DO NOTHING;
 
 --
 -- PostgreSQL database dump complete

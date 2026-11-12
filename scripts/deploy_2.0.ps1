@@ -50,6 +50,16 @@ Write-Host ""
 Write-Host "Estado de los servicios:"
 docker compose ps
 
+# Verificar / Sincronizar Base de Datos
+Write-Host ""
+Write-Host "Verificando tablas de la base de datos..."
+try {
+    docker compose exec api node migrate_notificaciones.js
+    Write-Host "Tablas de base de datos verificadas correctamente." -ForegroundColor Green
+} catch {
+    Write-Host "Aviso al verificar DB: $($_.Exception.Message)" -ForegroundColor Yellow
+}
+
 # Verificar API
 Write-Host ""
 Write-Host "Verificando API..."

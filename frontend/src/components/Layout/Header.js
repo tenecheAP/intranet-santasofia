@@ -26,7 +26,15 @@ function Header() {
     const file = e.target.files[0];
     if (!file) return;
 
-    if (!window.confirm('¿Estás seguro de restaurar la base de datos? Esto sobrescribirá los datos actuales.')) {
+    // Primera confirmación visual
+    if (!window.confirm('¿Confirmas que deseas cargar el backup? Reemplazará los datos actuales en la base.')) {
+      e.target.value = '';
+      return;
+    }
+    // Segunda confirmación de texto para evitar errores críticos
+    const typed = prompt('Escribe "RESTORE" (en mayúsculas) para confirmar la restauración de la base de datos:');
+    if (typed !== 'RESTORE') {
+      alert('Confirmación incorrecta. Operación cancelada.');
       e.target.value = '';
       return;
     }
@@ -134,7 +142,7 @@ function Header() {
                   <hr />
                   <button onClick={handleExportDB} className="dropdown-item">Exportar Base de Datos</button>
                   <label className="dropdown-item" style={{ cursor: 'pointer' }}>
-                    Restaurar Base de Datos
+                    Cargar Backup (Restaurar)
                     <input type="file" accept=".sql" onChange={handleImportDB} style={{ display: 'none' }} />
                   </label>
                   <hr />
